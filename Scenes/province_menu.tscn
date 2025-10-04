@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctr0wmdvif3vs"]
+
+[ext_resource type="Texture2D" uid="uid://bokgf558xs25h" path="res://images/province ui images/province ui background.png" id="1_bi3sk"]
+[ext_resource type="Texture2D" uid="uid://bvh4x12okgch2" path="res://images/province ui images/province ui.png" id="2_5hl6p"]
+
+[node name="ProvinceMenu" type="Node2D"]
+
+[node name="ProvinceUiBackground" type="Sprite2D" parent="."]
+position = Vector2(39, -46)
+scale = Vector2(4.02, 3.34)
+texture = ExtResource("1_bi3sk")
+
+[node name="ProvinceUi" type="Sprite2D" parent="ProvinceUiBackground"]
+position = Vector2(0, 31)
+texture = ExtResource("2_5hl6p")
+
+[node name="Button" type="Button" parent="ProvinceUiBackground/ProvinceUi"]
+offset_left = -38.0
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = -32.0
+
+[node name="ProvinceUi" type="Sprite2D" parent="ProvinceUiBackground/ProvinceUi"]
+position = Vector2(0, 31)
+texture = ExtResource("2_5hl6p")
+
+[node name="Button" type="Button" parent="ProvinceUiBackground/ProvinceUi/ProvinceUi"]
+offset_left = -38.0
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = -32.0
+
+[node name="ProvinceUi" type="Sprite2D" parent="ProvinceUiBackground/ProvinceUi/ProvinceUi"]
+position = Vector2(0, 31)
+texture = ExtResource("2_5hl6p")
+
+[node name="Button" type="Button" parent="ProvinceUiBackground/ProvinceUi/ProvinceUi/ProvinceUi"]
+offset_left = -38.0
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = -32.0
+
+[node name="ProvinceUi" type="Sprite2D" parent="ProvinceUiBackground/ProvinceUi/ProvinceUi/ProvinceUi"]
+position = Vector2(0, 31)
+texture = ExtResource("2_5hl6p")
+
+[node name="Button" type="Button" parent="ProvinceUiBackground/ProvinceUi/ProvinceUi/ProvinceUi/ProvinceUi"]
+offset_left = -38.0
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = -32.0
+
+[node name="ProvinceUi" type="Sprite2D" parent="."]
+position = Vector2(39, -59.36)
+scale = Vector2(4.02, 3.34)
+texture = ExtResource("2_5hl6p")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -114.0
+offset_top = -216.0
+offset_right = 200.0
+offset_bottom = -171.0
+theme_override_font_sizes/font_size = 32
+text = "Name of province"
