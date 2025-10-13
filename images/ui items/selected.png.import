@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1x06xafl71pp"
-path="res://.godot/imported/region_map.png-df100eda8906f4ee4c397a19bdb671de.ctex"
+uid="uid://y3hnmr0rbd3f"
+path="res://.godot/imported/selected.png-3e9e4fe91ca2ab0afc7159ce7ea75ca7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map_data/region_map.png"
-dest_files=["res://.godot/imported/region_map.png-df100eda8906f4ee4c397a19bdb671de.ctex"]
+source_file="res://images/ui items/selected.png"
+dest_files=["res://.godot/imported/selected.png-3e9e4fe91ca2ab0afc7159ce7ea75ca7.ctex"]
 
 [params]
 

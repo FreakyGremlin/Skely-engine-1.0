@@ -9,6 +9,7 @@ var prov_stats = {
 "countrie_color": "",
 "province_controller": ""
 }
+var selected_army_menu = ""
 var army_num = 1
 var hovered_nation_name = "best"
 enum PopupIds {
@@ -16,7 +17,8 @@ enum PopupIds {
 	set_prov_owner,
 	Set_controlled_nation,
 	Create_army,
-	Nation_name
+	Nation_name,
+	army_menu_popup
 }
 
 @onready var mapImage = $Sprite2D
@@ -27,9 +29,8 @@ func _ready():
 	_pm.add_item("Set Owner Of Province", PopupIds.set_prov_owner)
 	_pm.add_item("Set controlled nation", PopupIds.Set_controlled_nation)
 	_pm.add_item("create army", PopupIds.Create_army)
-	
 	_pm.add_item("", PopupIds.Nation_name)
-	
+	_pm.add_item("open army menu", PopupIds.army_menu_popup)
 	_pm.connect("id_pressed", Callable (self,"_on_PopupMenu_id_pressed"))
 	_pm.connect("index_pressed", Callable (self,"_on_PopupMenu_index_pressed"))
 	$PopupMenu.set_item_disabled(4, true)
@@ -37,13 +38,29 @@ func _ready():
 func _input(event):
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+		var main_menu = load("res://Scenes/main_menu.tscn")
 		_last_mouse_position = get_global_mouse_position()
-		_pm.popup(Rect2(_last_mouse_position.x, _last_mouse_position.y, _pm.size.x, _pm.size.y))
+		Info_bank.last_mouse_position = _last_mouse_position
+		print(_last_mouse_position)
+		print(Info_bank.last_mouse_position)
+		if Info_bank.main_menu_is_active == false:
+			var new_scene = main_menu.instantiate()
+			selected_army_menu = new_scene
+			add_child(new_scene)
+			Info_bank.main_menu = new_scene
+			new_scene.position = _last_mouse_position
+			Info_bank.main_menu_is_active = true
+		else:
+			Info_bank.main_menu.queue_free()
+			Info_bank.main_menu_is_active = false
 		print(Info_bank.HoveredNation)
 		print(Info_bank.HoveredNationColour)
 		print(Info_bank.ControlledNation)
 		print(Info_bank.ControlledNationColour)
-		
+		if Info_bank.something_selected == true:
+			$PopupMenu.set_item_disabled(5, false)
+		else:
+			$PopupMenu.set_item_disabled(5, true)
 		if Info_bank.HoveredNation == Info_bank.ControlledNation:
 			$PopupMenu.set_item_disabled(3, false)
 			$PopupMenu.set_item_disabled(2, true)
@@ -52,9 +69,7 @@ func _input(event):
 			$PopupMenu.set_item_disabled(3, true)
 			$PopupMenu.set_item_disabled(2, false)
 			$PopupMenu.set_item_disabled(1, false)
-		
 	var Province_data = str(region_name) + ".json"
-	
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 		var prov_res = "res://Map_data/Provinces/" + Province_data
@@ -79,6 +94,7 @@ func _input(event):
 				push_error("Parsed JSON is not a dictionary. Check the file content.")
 		else:
 			push_error("Failed to open file: " + prov_res)
+		
 	
 	
 	if Input.is_action_just_pressed("test_imput_1"):
@@ -229,6 +245,22 @@ func _on_popup_menu_id_pressed(id: PopupIds):
 			var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(army_num) + ".json", FileAccess.WRITE)
 			army_file.store_string(json_string)
 			army_file.close()
+		PopupIds.army_menu_popup:
+			print("army menu")
+			var army_menu = load("res://Scenes/unit_menu.tscn")
+			if Info_bank.army_menu_is_active == false:
+				if Info_bank.something_selected == true:
+					
+					var new_scene = army_menu.instantiate()
+					selected_army_menu = new_scene
+					add_child(new_scene)
+					new_scene.position = _last_mouse_position
+					Info_bank.army_menu_is_active = true
+					print(selected_army_menu)
+			else:
+				
+				selected_army_menu.queue_free()
+				Info_bank.army_menu_is_active = false
 
 
 func _on_popup_menu_index_pressed(index: ) -> void:

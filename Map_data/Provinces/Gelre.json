@@ -1,6 +1,6 @@
 {
-	"countrie_color": "fcc132",
+	"countrie_color": "#ffffbe",
 	"name": "Zeeland",
 	"prov_tag": "GLR",
-	"province_controller": "GLR"
+	"province_controller": "AST"
 }

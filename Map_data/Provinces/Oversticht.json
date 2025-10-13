@@ -1,1 +1,6 @@
-{"countrie_color":"ff9dbe","name":"Zeeland","prov_tag":"OVR","province_controller":"UCH"}
+{
+	"countrie_color": "ff9dbe",
+	"name": "Zeeland",
+	"prov_tag": "OVR",
+	"province_controller": "UCH"
+}

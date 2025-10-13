@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://deuaa60xkypw1"]
+
+[ext_resource type="Script" uid="uid://dka4vks3tim14" path="res://node_2d.gd" id="1_28flt"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_28flt")
+
+[node name="Button1" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "set controlled nation "
+
+[node name="Button2" type="Button" parent="Button1"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 176.0
+offset_bottom = 63.0
+text = "set owner of province"
+
+[connection signal="pressed" from="Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="Button1/Button2" to="." method="_on_button_2_pressed"]

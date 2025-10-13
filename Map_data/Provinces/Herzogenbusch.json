@@ -1,6 +1,6 @@
 {
-	"countrie_color": "#ffffbe",
+	"countrie_color": "ff9dbe",
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
-	"province_controller": "AST"
+	"province_controller": "UCH"
 }

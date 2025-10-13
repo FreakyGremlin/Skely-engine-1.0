@@ -5,18 +5,17 @@ var nation_color = ""
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+	Info_bank.region_gd_ref = self
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 
 func _on_child_entered_tree(node):
 	var Province_data = str(region_name) + ".json"
 	var prov_res = "res://Map_data/Provinces/" + Province_data
 	var prov_file := FileAccess.open(prov_res, FileAccess.READ)
-	
+	print(node.name)
 	if prov_file:
 		var file_text := prov_file.get_as_text()
 		prov_file.close()  # Always close the file when done
@@ -24,6 +23,7 @@ func _on_child_entered_tree(node):
 		var prov_json_data = JSON.parse_string(file_text)
 		
 		if typeof(prov_json_data) == TYPE_DICTIONARY:
+			print(region_name)
 			var prov_controller = prov_json_data.get("province_controller", "Controller not found")
 			var nation_name = prov_controller + ".json"
 			var Nation_info = "res://Map_data/nations/" + nation_name
@@ -38,7 +38,34 @@ func _on_child_entered_tree(node):
 			push_error("Parsed JSON is not a dictionary. Check the file content.")
 	else:
 		push_error("Failed to open file: " + prov_res)
+
+func update_tiles():
+	var root = get_tree().get_root()
+	_recursive_update_tiles(root)
+
+func _recursive_update_tiles(node):
+	var Province_data = Info_bank.HoveredProvince
+	print(Info_bank.HoveredProvince)
+	var prov_res = "res://Map_data/Provinces/" + Province_data
+	var prov_file := FileAccess.open(prov_res, FileAccess.READ)
 	
+	if prov_file:
+		var file_text := prov_file.get_as_text()
+		prov_file.close()  # Always close the file when done
+
+		var prov_json_data = JSON.parse_string(file_text)
+		
+		if typeof(prov_json_data) == TYPE_DICTIONARY:
+			print(region_name)
+			var prov_id = prov_json_data.get("province_ids", "nation color not found")
+			print(prov_id)
+			if node is Polygon2D:
+				if node.name == prov_id:
+					print(prov_id)
+					node.color = Color(Info_bank.ControlledNationColour)
+	
+	for child in node.get_children():
+		_recursive_update_tiles(child)
 
 
 func _on_mouse_entered():
@@ -81,9 +108,9 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	var Province_data = str(region_name) + ".json"
+	print(region_name)
 	var prov_res = "res://Map_data/Provinces/" + Province_data
 	var prov_file := FileAccess.open(prov_res, FileAccess.READ)
-	
 	if prov_file:
 		var file_text := prov_file.get_as_text()
 		prov_file.close()  # Always close the file when done
@@ -105,5 +132,4 @@ func _on_mouse_exited():
 			push_error("Parsed JSON is not a dictionary. Check the file content.")
 	else:
 		push_error("Failed to open file: " + prov_res)
-	
 	

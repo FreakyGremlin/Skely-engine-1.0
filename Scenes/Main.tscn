@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://rrqjn7jc4klt"]
+[gd_scene load_steps=4 format=3 uid="uid://rrqjn7jc4klt"]
 
 [ext_resource type="Script" uid="uid://baxb57w0odkgo" path="res://Scenes/Main.gd" id="1_iy2ag"]
 [ext_resource type="Texture2D" uid="uid://d1x06xafl71pp" path="res://Map_data/region_map.png" id="2_idj7w"]
+[ext_resource type="Script" uid="uid://ctfd4t73xm3lk" path="res://Scenes/camera_2d.gd" id="3_kln2b"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_iy2ag")
@@ -15,6 +16,11 @@ centered = false
 [node name="Regions" type="Node2D" parent="."]
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(196, 135)
+scale = Vector2(2.59489, 3.18716)
+script = ExtResource("3_kln2b")
 
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]
 [connection signal="index_pressed" from="PopupMenu" to="." method="_on_popup_menu_index_pressed"]
