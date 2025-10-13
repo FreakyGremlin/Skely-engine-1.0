@@ -130,6 +130,7 @@ func load_regions():
 			
 			region.add_child(region_collision)
 			region.add_child(region_polygon)
+			
 	mapImage.queue_free()
 
 func get_pixel_color_dict(image):

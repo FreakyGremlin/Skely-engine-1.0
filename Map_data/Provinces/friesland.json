@@ -2,6 +2,6 @@
 	"countrie_color": "889cff",
 	"name": "Friesland",
 	"prov_tag": "FRI",
-	"province_controller": "FRI"
-	"province_ids": 
+	"province_controller": "FRI",
+	"province_ids": ["@Polygon2D@12" , "@Polygon2D@10"]
 }

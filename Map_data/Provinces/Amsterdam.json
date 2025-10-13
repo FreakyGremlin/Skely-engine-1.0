@@ -1,7 +1,7 @@
 {
-	"countrie_color": "#ffffbe",
+	"countrie_color": "889cff",
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
-	"province_controller": "AST",
+	"province_controller": "FRI",
 	"province_ids": "@Polygon2D@"
 }

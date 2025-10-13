@@ -57,12 +57,14 @@ func _recursive_update_tiles(node):
 		
 		if typeof(prov_json_data) == TYPE_DICTIONARY:
 			print(region_name)
-			var prov_id = prov_json_data.get("province_ids", "nation color not found")
-			print(prov_id)
+			var prov_ids = prov_json_data.get("province_ids", [])  # Use [] as a fallback instead of string
+			print(prov_ids)
+
 			if node is Polygon2D:
-				if node.name == prov_id:
-					print(prov_id)
-					node.color = Color(Info_bank.ControlledNationColour)
+				for id in prov_ids:
+					if node.name == id:
+						print("Matched ID:", id)
+						node.color = Color(Info_bank.ControlledNationColour)
 	
 	for child in node.get_children():
 		_recursive_update_tiles(child)
