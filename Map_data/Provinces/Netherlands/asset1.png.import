@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://divsjmj364cyj"
-path="res://.godot/imported/asset1.png-b11aebc5080bc4fde59125c3bbc034af.ctex"
+path="res://.godot/imported/asset1.png-9feb1f305cdf12347cd074a1a294e430.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Map_data/asset1.png"
-dest_files=["res://.godot/imported/asset1.png-b11aebc5080bc4fde59125c3bbc034af.ctex"]
+source_file="res://Map_data/Provinces/Netherlands/asset1.png"
+dest_files=["res://.godot/imported/asset1.png-9feb1f305cdf12347cd074a1a294e430.ctex"]
 
 [params]
 

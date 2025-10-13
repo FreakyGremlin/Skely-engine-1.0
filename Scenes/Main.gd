@@ -21,7 +21,7 @@ enum PopupIds {
 	army_menu_popup
 }
 
-@onready var mapImage = $Sprite2D
+@onready var mapImage = $RegionMap
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_regions()

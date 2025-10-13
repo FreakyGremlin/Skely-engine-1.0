@@ -1,0 +1,10 @@
+{
+	"countrie_color": "#ffffbe",
+	"name": "Zeeland",
+	"prov_tag": "ZEE",
+	"province_controller": "AST",
+	"province_ids": [
+		"@Polygon2D@18",
+		"@Polygon2D@20"
+	]
+}
