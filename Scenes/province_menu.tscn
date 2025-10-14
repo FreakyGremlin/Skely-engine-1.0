@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctr0wmdvif3vs"]
+[gd_scene load_steps=4 format=3 uid="uid://ctr0wmdvif3vs"]
 
+[ext_resource type="Script" uid="uid://bupknk5thexd5" path="res://Scenes/province_menu.gd" id="1_5hl6p"]
 [ext_resource type="Texture2D" uid="uid://bokgf558xs25h" path="res://images/province ui images/province ui background.png" id="1_bi3sk"]
 [ext_resource type="Texture2D" uid="uid://bvh4x12okgch2" path="res://images/province ui images/province ui.png" id="2_5hl6p"]
 
 [node name="ProvinceMenu" type="Node2D"]
-position = Vector2(-1554, -280)
+script = ExtResource("1_5hl6p")
 
 [node name="ProvinceUiBackground" type="Sprite2D" parent="."]
-position = Vector2(39, -46)
 scale = Vector2(4.02, 3.34)
 texture = ExtResource("1_bi3sk")
 
@@ -55,16 +55,13 @@ offset_right = 40.0
 offset_bottom = -32.0
 metadata/_edit_use_anchors_ = true
 
-[node name="ProvinceUi" type="Sprite2D" parent="."]
-position = Vector2(39, -59.36)
-scale = Vector2(4.02, 3.34)
-texture = ExtResource("2_5hl6p")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -114.0
-offset_top = -216.0
-offset_right = 200.0
-offset_bottom = -171.0
-theme_override_font_sizes/font_size = 32
-text = "Name of province"
-metadata/_edit_use_anchors_ = true
+[node name="RichTextLabel" type="RichTextLabel" parent="ProvinceUiBackground"]
+offset_left = -45.0
+offset_top = -69.0
+offset_right = 140.0
+offset_bottom = -19.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/normal_font_size = 25
+text = "yjjtyjt"
+fit_content = true
+tab_size = 2

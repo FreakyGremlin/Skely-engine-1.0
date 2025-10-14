@@ -42,8 +42,7 @@ func _input(event):
 		_last_mouse_position = get_global_mouse_position()
 		Info_bank.last_mouse_position = _last_mouse_position
 		Info_bank.selected_prov = Info_bank.HoveredProvince
-		print(_last_mouse_position)
-		print(Info_bank.last_mouse_position)
+		Info_bank.selected_prov_name = Info_bank.HoveredProvinceName
 		if Info_bank.main_menu_is_active == false:
 			var new_scene = main_menu.instantiate()
 			selected_army_menu = new_scene
@@ -52,12 +51,8 @@ func _input(event):
 			new_scene.position = _last_mouse_position
 			Info_bank.main_menu_is_active = true
 		else:
-			Info_bank.main_menu.queue_free()
+			
 			Info_bank.main_menu_is_active = false
-		print(Info_bank.HoveredNation)
-		print(Info_bank.HoveredNationColour)
-		print(Info_bank.ControlledNation)
-		print(Info_bank.ControlledNationColour)
 		if Info_bank.something_selected == true:
 			$PopupMenu.set_item_disabled(5, false)
 		else:

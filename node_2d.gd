@@ -1,11 +1,11 @@
 extends Node2D
-
+var new_scene: Node = null
 func _on_button_1_pressed() -> void:
 	Info_bank.ControlledNation = Info_bank.HoveredNation
 	Info_bank.ControlledNationColour = Info_bank.HoveredNationColour
 	Info_bank.main_menu.queue_free()
 	Info_bank.main_menu_is_active = false
-	
+
 func _on_button_2_pressed() -> void:
 	print("test")
 	# Get the hovered province name
@@ -63,11 +63,23 @@ func _on_button_2_pressed() -> void:
 	Info_bank.main_menu.queue_free()
 	Info_bank.main_menu_is_active = false
 
-
 func _on_button_3_pressed() -> void:
-	
-	var scene_to_instantiate = load("res://Scenes/province_menu.tscn")
-	var new_scene = scene_to_instantiate.instantiate()
-	add_child(new_scene)
-	new_scene.global_position = self.global_position
-	new_scene.size = 
+	var canvas_layer: CanvasLayer = null
+	if Info_bank.main_menu_is_active == false:
+		# Look for CanvasLayer in the current scene
+		for node in get_tree().get_current_scene().get_children():
+			if node is CanvasLayer:
+				canvas_layer = node
+				break
+		if canvas_layer:
+			var scene_to_instantiate = load("res://Scenes/province_menu.tscn")
+			new_scene = scene_to_instantiate.instantiate()  # Use global new_scene
+			canvas_layer.add_child(new_scene)
+			new_scene.global_position = Vector2(200, 700)
+			self.queue_free()
+			Info_bank.main_menu_is_active = true
+	else:
+		if new_scene != null:
+			new_scene.queue_free()
+			new_scene = null
+		Info_bank.main_menu_is_active = false
