@@ -17,5 +17,13 @@ offset_right = 176.0
 offset_bottom = 63.0
 text = "set owner of province"
 
+[node name="Button3" type="Button" parent="Button1/Button2"]
+layout_mode = 0
+offset_top = 31.0
+offset_right = 176.0
+offset_bottom = 62.0
+text = "province menu"
+
 [connection signal="pressed" from="Button1" to="." method="_on_button_1_pressed"]
 [connection signal="pressed" from="Button1/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button1/Button2/Button3" to="." method="_on_button_3_pressed"]

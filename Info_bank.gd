@@ -13,3 +13,4 @@ var last_mouse_position
 var main_menu_is_active = false
 var main_menu = ""
 var region_gd_ref = ""
+var selected_prov = ""

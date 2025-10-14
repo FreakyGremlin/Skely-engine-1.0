@@ -41,6 +41,7 @@ func _input(event):
 		var main_menu = load("res://Scenes/main_menu.tscn")
 		_last_mouse_position = get_global_mouse_position()
 		Info_bank.last_mouse_position = _last_mouse_position
+		Info_bank.selected_prov = Info_bank.HoveredProvince
 		print(_last_mouse_position)
 		print(Info_bank.last_mouse_position)
 		if Info_bank.main_menu_is_active == false:

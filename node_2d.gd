@@ -9,7 +9,7 @@ func _on_button_1_pressed() -> void:
 func _on_button_2_pressed() -> void:
 	print("test")
 	# Get the hovered province name
-	var HoveredProvince = Info_bank.HoveredProvince
+	var HoveredProvince = Info_bank.selected_prov
 
 	# Build the path to the province JSON file
 	var prov_res = "res://Map_data/Provinces/" + HoveredProvince
@@ -62,3 +62,12 @@ func _on_button_2_pressed() -> void:
 
 	Info_bank.main_menu.queue_free()
 	Info_bank.main_menu_is_active = false
+
+
+func _on_button_3_pressed() -> void:
+	
+	var scene_to_instantiate = load("res://Scenes/province_menu.tscn")
+	var new_scene = scene_to_instantiate.instantiate()
+	add_child(new_scene)
+	new_scene.global_position = self.global_position
+	new_scene.size = 
