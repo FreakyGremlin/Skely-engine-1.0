@@ -20,7 +20,7 @@ enum PopupIds {
 	Nation_name,
 	army_menu_popup
 }
-
+var new_scene : Node
 @onready var mapImage = $RegionMap
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,8 +51,12 @@ func _input(event):
 			new_scene.position = _last_mouse_position
 			Info_bank.main_menu_is_active = true
 		else:
-			
+			if new_scene != null:
+				new_scene.queue_free()
+				new_scene = null
 			Info_bank.main_menu_is_active = false
+			print(Info_bank.main_menu_is_active)
+			
 		if Info_bank.something_selected == true:
 			$PopupMenu.set_item_disabled(5, false)
 		else:
