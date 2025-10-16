@@ -1,8 +1,8 @@
 extends Camera2D
 @onready var camera_ref = $"."
-@export var zoom_speed: float = 0.1 # How much the zoom changes per scroll
+@export var zoom_speed: float = 1 # How much the zoom changes per scroll
 @export var min_zoom: Vector2 = Vector2(-1, -1) # Minimum zoom level
-@export var max_zoom: Vector2 = Vector2(2.0, 2.0) # Maximum zoom level
+@export var max_zoom: Vector2 = Vector2(3.0, 3.0) # Maximum zoom level
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("zoom_in"):
