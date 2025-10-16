@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="skelly engine 0.1"
-run/main_scene="uid://rrqjn7jc4klt"
-config/features=PackedStringArray("4.4", "Forward Plus")
+run/main_scene="uid://cq06i48qid6om"
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]

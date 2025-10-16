@@ -21,7 +21,5 @@ position = Vector2(836, 88)
 scale = Vector2(3.62, 3.62)
 texture = ExtResource("4_rgh2o")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]
 [connection signal="index_pressed" from="PopupMenu" to="." method="_on_popup_menu_index_pressed"]
