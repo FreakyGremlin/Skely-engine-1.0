@@ -1,17 +1,10 @@
 {
 	"countrie_color": "889cff",
-<<<<<<< Updated upstream
-=======
 	"manpower": 12375.0,
->>>>>>> Stashed changes
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "FRI",
 	"province_ids": [
 		"@Polygon2D@14"
 	]
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

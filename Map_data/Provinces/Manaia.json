@@ -3,14 +3,8 @@
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
-<<<<<<< Updated upstream
-	"province_controller": "LIG",
-	"province_ids": ["@Polygon2D@32"]
-}
-=======
 	"province_controller": "FRI",
 	"province_ids": [
 		"@Polygon2D@32"
 	]
 }
->>>>>>> Stashed changes
