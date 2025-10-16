@@ -1,6 +1,6 @@
 extends Node2D
 var new_scene: Node = null
-
+var army_num = 0
 func _enter_tree() -> void:
 	Info_bank.menu_is_active = true
 func _on_button_1_pressed() -> void:
@@ -82,3 +82,23 @@ func _on_button_3_pressed() -> void:
 			Info_bank.new_scene.global_position = Vector2(200, 700)
 			self.queue_free()
 			Info_bank.menu_is_active = true
+
+
+func _on_button_4_pressed() -> void:
+	army_num += 1
+	var army_base_data = {
+		"army_tag" : "1"
+		
+	}
+	var scene_to_instantiate = load("res://Map_data/armies/army.tscn")
+	var new_scene = scene_to_instantiate.instantiate()
+	
+	add_child(new_scene)
+	new_scene.global_position = Info_bank.last_mouse_position
+	Info_bank.name_of_army_file = "army" + str(army_num)
+	var json_string = JSON.stringify(army_base_data, "\t")
+	
+	var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(army_num) + ".json", FileAccess.WRITE)
+	army_file.store_string(json_string)
+	army_file.close()
+	print("army made")
