@@ -43,19 +43,21 @@ func _input(event):
 		Info_bank.last_mouse_position = _last_mouse_position
 		Info_bank.selected_prov = Info_bank.HoveredProvince
 		Info_bank.selected_prov_name = Info_bank.HoveredProvinceName
-		if Info_bank.main_menu_is_active == false:
-			var new_scene = main_menu.instantiate()
-			selected_army_menu = new_scene
-			add_child(new_scene)
-			Info_bank.main_menu = new_scene
-			new_scene.position = _last_mouse_position
-			Info_bank.main_menu_is_active = true
+		if Info_bank.menu_is_active == false:
+			Info_bank.new_scene = main_menu.instantiate()
+			selected_army_menu = Info_bank.new_scene
+			add_child(Info_bank.new_scene)
+			Info_bank.main_menu = Info_bank.new_scene
+			Info_bank.new_scene.position = _last_mouse_position
+			Info_bank.menu_is_active = true
 		else:
-			if new_scene != null:
-				new_scene.queue_free()
-				new_scene = null
-			Info_bank.main_menu_is_active = false
-			print(Info_bank.main_menu_is_active)
+			if Info_bank.new_scene != null:
+				Info_bank.new_scene.queue_free()
+				Info_bank.new_scene = null
+				print("scene deleted")
+				Info_bank.menu_is_active = false
+			Info_bank.menu_is_active = false
+			print(str(Info_bank.menu_is_active) + "deleted")
 			
 		if Info_bank.something_selected == true:
 			$PopupMenu.set_item_disabled(5, false)

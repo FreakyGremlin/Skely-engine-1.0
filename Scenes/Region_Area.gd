@@ -15,7 +15,6 @@ func _on_child_entered_tree(node):
 	var Province_data = str(region_name) + ".json"
 	var prov_res = "res://Map_data/Provinces/" + Province_data
 	var prov_file := FileAccess.open(prov_res, FileAccess.READ)
-	print(node.name)
 	if prov_file:
 		var file_text := prov_file.get_as_text()
 		prov_file.close()  # Always close the file when done
@@ -56,9 +55,9 @@ func _recursive_update_tiles(node):
 		var prov_json_data = JSON.parse_string(file_text)
 		
 		if typeof(prov_json_data) == TYPE_DICTIONARY:
-			print(region_name)
+			
 			var prov_ids = prov_json_data.get("province_ids", [])  # Use [] as a fallback instead of string
-			print(prov_ids)
+			
 
 			if node is Polygon2D:
 				for id in prov_ids:

@@ -1,5 +1,8 @@
 extends Node2D
 var new_scene: Node = null
+
+func _enter_tree() -> void:
+	Info_bank.menu_is_active = true
 func _on_button_1_pressed() -> void:
 	Info_bank.ControlledNation = Info_bank.HoveredNation
 	Info_bank.ControlledNationColour = Info_bank.HoveredNationColour
@@ -64,8 +67,9 @@ func _on_button_2_pressed() -> void:
 	Info_bank.main_menu_is_active = false
 
 func _on_button_3_pressed() -> void:
+	print(str(Info_bank.menu_is_active) + str(1))
 	var canvas_layer: CanvasLayer = null
-	if Info_bank.main_menu_is_active == false:
+	if Info_bank.menu_is_active == true:
 		# Look for CanvasLayer in the current scene
 		for node in get_tree().get_current_scene().get_children():
 			if node is CanvasLayer:
@@ -73,13 +77,8 @@ func _on_button_3_pressed() -> void:
 				break
 		if canvas_layer:
 			var scene_to_instantiate = load("res://Scenes/province_menu.tscn")
-			new_scene = scene_to_instantiate.instantiate()  # Use global new_scene
-			canvas_layer.add_child(new_scene)
-			new_scene.global_position = Vector2(200, 700)
+			Info_bank.new_scene = scene_to_instantiate.instantiate()  # Use global new_scene
+			canvas_layer.add_child(Info_bank.new_scene)
+			Info_bank.new_scene.global_position = Vector2(200, 700)
 			self.queue_free()
-			Info_bank.main_menu_is_active = true
-	else:
-		if new_scene != null:
-			new_scene.queue_free()
-			new_scene = null
-		Info_bank.main_menu_is_active = false
+			Info_bank.menu_is_active = true
