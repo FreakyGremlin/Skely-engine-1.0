@@ -3,5 +3,6 @@
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "LIG",
-	"province_ids": ["@Polygon2D@28"]
+	"province_ids": ["@Polygon2D@28"],
+	"manpower": 12375
 }

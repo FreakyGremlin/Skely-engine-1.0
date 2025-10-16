@@ -3,5 +3,9 @@
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "LIG",
+<<<<<<< Updated upstream
+=======
+	"manpower": 12375,
+>>>>>>> Stashed changes
 	"province_ids": ["@Polygon2D@34"]
 }

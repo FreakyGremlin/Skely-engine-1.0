@@ -3,8 +3,14 @@
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "CLV",
+<<<<<<< Updated upstream
 	"province_ids": [
 		"@Polygon2D@8",
 		"@Polygon2D@10"
 	]
+=======
+	"province_ids": ["@Polygon2D@8","@Polygon2D@10"],
+	"manpower": 12375
+	
+>>>>>>> Stashed changes
 }
