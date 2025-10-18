@@ -2,5 +2,6 @@
 	"countrie_color": "#ffffbe",
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
+	"manpower": 12375.0,
 	"province_controller": "AST"
 }

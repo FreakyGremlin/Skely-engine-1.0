@@ -14,6 +14,20 @@ scale = Vector2(0.346111, 0.34602)
 texture = ExtResource("1_dk4fx")
 script = ExtResource("2_3co52")
 
+[node name="Button" type="Button" parent="Sprite2D"]
+offset_left = 40.44945
+offset_top = -43.35009
+offset_right = 91.44945
+offset_bottom = -12.35009
+text = "move"
+
+[node name="Button2" type="Button" parent="Sprite2D"]
+offset_left = 43.3387
+offset_top = 2.8900032
+offset_right = 94.3387
+offset_bottom = 33.890003
+text = "add infantry"
+
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
@@ -28,5 +42,7 @@ texture = ExtResource("3_aa882")
 metadata/_edit_group_ = true
 
 [connection signal="child_entered_tree" from="." to="Sprite2D" method="_on_node_2d_child_entered_tree"]
+[connection signal="pressed" from="Sprite2D/Button" to="Sprite2D" method="_on_button_pressed"]
+[connection signal="pressed" from="Sprite2D/Button2" to="Sprite2D" method="_on_button_2_pressed"]
 [connection signal="input_event" from="Sprite2D/Area2D" to="Sprite2D" method="_on_area_2d_input_event"]
 [connection signal="child_entered_tree" from="Sprite2D/Sprite2D2" to="Sprite2D" method="_on_sprite_2d_2_child_entered_tree"]

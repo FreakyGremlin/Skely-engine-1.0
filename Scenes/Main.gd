@@ -24,6 +24,7 @@ var new_scene : Node
 @onready var mapImage = $RegionMap
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	load_regions()
 	_pm.add_item("Check Nation", PopupIds.Check_Nation)
 	_pm.add_item("Set Owner Of Province", PopupIds.set_prov_owner)

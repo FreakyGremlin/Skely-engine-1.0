@@ -6,5 +6,6 @@
 	"province_controller": "FRI",
 	"province_ids": [
 		"@Polygon2D@14"
-	]
+	],
+	"tile_located_on": "Mangatangi.json"
 }

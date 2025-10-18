@@ -3,5 +3,8 @@
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "FRI",
-	"province_ids": ["@Polygon2D@20"]
+	"province_ids": [
+		"@Polygon2D@20"
+	],
+	"tile_located_on": "Onewhero.json"
 }

@@ -7,5 +7,6 @@
 	"province_ids": [
 		"@Polygon2D@8",
 		"@Polygon2D@10"
-	]
+	],
+	"tile_located_on": "South Auckland.json"
 }
