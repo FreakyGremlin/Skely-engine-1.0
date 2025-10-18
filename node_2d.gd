@@ -89,7 +89,7 @@ func _on_button_4_pressed() -> void:
 	var army_base_data = {
 		"army_tag" : "1",
 		"infantry_num" : 0,
-		"tile_located_on" : ""
+		"tile_located_on" : Info_bank.selected_prov_name
 		
 	}
 	var scene_to_instantiate = load("res://Map_data/armies/army.tscn")

@@ -15,18 +15,20 @@ texture = ExtResource("1_dk4fx")
 script = ExtResource("2_3co52")
 
 [node name="Button" type="Button" parent="Sprite2D"]
-offset_left = 40.44945
-offset_top = -43.35009
-offset_right = 91.44945
-offset_bottom = -12.35009
+offset_left = 40.4495
+offset_top = -43.3501
+offset_right = 91.4494
+offset_bottom = -12.3501
 text = "move"
+metadata/_edit_use_anchors_ = true
 
 [node name="Button2" type="Button" parent="Sprite2D"]
 offset_left = 43.3387
-offset_top = 2.8900032
+offset_top = 2.89
 offset_right = 94.3387
-offset_bottom = 33.890003
+offset_bottom = 33.89
 text = "add infantry"
+metadata/_edit_use_anchors_ = true
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 

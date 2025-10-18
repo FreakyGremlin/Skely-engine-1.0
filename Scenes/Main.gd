@@ -140,20 +140,29 @@ func get_pixel_color_dict(image):
 	var pixel_color_dict = {}
 	for y in range(image.get_height()):
 		for x in range(image.get_width()):
-			var pixel_color = "#" + str(image.get_pixel(int(x), int(y)).to_html(false))
+			var pixel_color = "#" + str(image.get_pixel(x, y).to_html(false))
 			if pixel_color not in pixel_color_dict:
 				pixel_color_dict[pixel_color] = []
-			pixel_color_dict[pixel_color].append(Vector2(x,y))
+			pixel_color_dict[pixel_color].append(Vector2(x, y))
 	return pixel_color_dict
 
+
 func get_polygons(image, region_color, pixel_color_dict):
-	var targetImage = Image.create(image.get_size().x,image.get_size().y, false, Image.FORMAT_RGBA8)
+	var target_image = Image.create(image.get_size().x, image.get_size().y, false, Image.FORMAT_RGBA8)
+	target_image.fill(Color(0, 0, 0, 0))  # Ensure transparent background
+	
 	for value in pixel_color_dict[region_color]:
-		targetImage.set_pixel(value.x,value.y, "#ffffff")
-		
+		target_image.set_pixel(value.x, value.y, Color(1, 1, 1, 1))  # Opaque white
+
+	# Important: Lock image if needed (depending on version)
+	# target_image.lock()
+
 	var bitmap = BitMap.new()
-	bitmap.create_from_image_alpha(targetImage)
-	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2(0,0), bitmap.get_size()), 0.1)
+	bitmap.create_from_image_alpha(target_image)
+
+	var rect = Rect2(Vector2(0, 0), bitmap.get_size())
+	var polygons = bitmap.opaque_to_polygons(rect, 0.0)  # No simplification
+	
 	return polygons
 
 #Import JSON files and converts to lists or dictionary

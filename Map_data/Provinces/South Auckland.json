@@ -1,9 +1,9 @@
 {
-	"countrie_color": "889cff",
+	"countrie_color": "8d9c57",
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
-	"province_controller": "FRI",
+	"province_controller": "CLV",
 	"province_ids": [
 		"@Polygon2D@8",
 		"@Polygon2D@10"
