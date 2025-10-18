@@ -1,6 +1,10 @@
 {
 	"countrie_color": "#ffffbe",
 	"name": "Zeeland",
-	"prov_tag": "ZEE",
-	"province_controller": "AST"
+	"prov_tag": "WMT",
+	"province_controller": "AST",
+	"unit_marker" : [246.8, 232.4],
+	"province_ids": [
+		"@Polygon2D@88"
+	]
 }

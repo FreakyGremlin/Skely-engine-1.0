@@ -1,11 +1,14 @@
 {
-	"countrie_color": "8d9c57",
+	"countrie_color": "889cff",
 	"manpower": 12375.0,
 	"name": "Zeeland",
-	"prov_tag": "ZEE",
-	"province_controller": "CLV",
+	"prov_tag": "MAN",
+	"province_controller": "FRI",
 	"province_ids": [
-		"@Polygon2D@14"
+		"@Polygon2D@16"
 	],
-	"tile_located_on": "Mangatangi.json"
+	"unit_marker": [
+		493.25,
+		504.5
+	]
 }

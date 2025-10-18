@@ -1,7 +1,8 @@
 {
 	"countrie_color": "2f6d57",
 	"name": "Zeeland",
-	"prov_tag": "ZEE",
+	"prov_tag": "WAH",
 	"province_controller": "LIG",
-	"province_ids": ["@Polygon2D@26"]
+	"unit_marker" : [593.6666, 508.6666],
+	"province_ids": ["@Polygon2D@28"]
 }

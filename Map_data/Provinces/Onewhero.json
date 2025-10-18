@@ -1,10 +1,10 @@
 {
 	"countrie_color": "889cff",
 	"name": "Zeeland",
-	"prov_tag": "ZEE",
+	"prov_tag": "ONW",
 	"province_controller": "FRI",
+	"unit_marker" : [411.25, 527.0],
 	"province_ids": [
-		"@Polygon2D@20"
+		"@Polygon2D@22"
 	],
-	"tile_located_on": "Onewhero.json"
 }

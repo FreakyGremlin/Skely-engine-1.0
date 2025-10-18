@@ -1,9 +1,14 @@
 {
-	"countrie_color": "8d9c57",
+	"countrie_color": "889cff",
 	"name": "Zeeland",
-	"prov_tag": "ZEE",
-	"province_controller": "CLV",
+	"prov_tag": "MER",
+	"province_controller": "FRI",
 	"province_ids": [
-		"@Polygon2D@22"
+		"@Polygon2D@24",
+		"@Polygon2D@26"
+	],
+	"unit_marker": [
+		454.0,
+		512.0
 	]
 }

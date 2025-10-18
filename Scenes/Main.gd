@@ -55,10 +55,8 @@ func _input(event):
 			if Info_bank.new_scene != null:
 				Info_bank.new_scene.queue_free()
 				Info_bank.new_scene = null
-				print("scene deleted")
 				Info_bank.menu_is_active = false
 			Info_bank.menu_is_active = false
-			print(str(Info_bank.menu_is_active) + "deleted")
 			
 		if Info_bank.something_selected == true:
 			$PopupMenu.set_item_disabled(5, false)
@@ -73,32 +71,7 @@ func _input(event):
 			$PopupMenu.set_item_disabled(2, false)
 			$PopupMenu.set_item_disabled(1, false)
 	var Province_data = str(region_name) + ".json"
-	
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-		var prov_res = "res://Map_data/Provinces/" + Province_data
-		var prov_file := FileAccess.open(prov_res, FileAccess.READ)
-		
-		if prov_file:
-			var file_text := prov_file.get_as_text()
-			prov_file.close()  # Always close the file when done
 
-			var json_data = JSON.parse_string(file_text)
-			
-			if typeof(json_data) == TYPE_DICTIONARY:
-				var prov_controller = json_data.get("province_controller", "Controller not found")
-				var nation_name = prov_controller + ".json"
-				var Nation_info = "res://Map_data/nations/" + nation_name
-				var nation_file = FileAccess.open(Nation_info, FileAccess.READ)
-				var nation_text = nation_file.get_as_text()
-				var parsed_nat_text = JSON.parse_string(nation_text)
-				var selected_nation_name = parsed_nat_text.get("nation_name", "nation color not found")
-				
-			else:
-				push_error("Parsed JSON is not a dictionary. Check the file content.")
-		else:
-			push_error("Failed to open file: " + prov_res)
-		
-	
 	
 	if Input.is_action_just_pressed("test_imput_1"):
 		var scene_to_instantiate = load("res://Scenes/province_menu.tscn")
@@ -173,108 +146,3 @@ func import_file(filepath):
 	else:
 		print("Failed to open file:", filepath)
 		return null
-
-
-
-func _on_popup_menu_id_pressed(id: PopupIds):
-	 
-	match id:
-		PopupIds.Check_Nation:
-			print("test2")
-			print(prov_stats)
-		PopupIds.set_prov_owner:
-			print("test")
-			# Get the hovered province name
-			var HoveredProvince = Info_bank.HoveredProvince
-
-			# Build the path to the province JSON file
-			var prov_res = "res://Map_data/Provinces/" + HoveredProvince
-
-			# Open the file in read mode first
-			var prov_file = FileAccess.open(prov_res, FileAccess.READ)
-
-			if prov_file == null:
-				print("Failed to open file for reading:", prov_res)
-				return
-
-			# Read the file content and parse the JSON
-			var json_text = prov_file.get_as_text()
-			prov_file.close()  # Always close files when done
-
-			# Parse JSON
-			var json = JSON.new()
-			var parse_result = json.parse(json_text)
-
-			if parse_result != OK:
-				print("Failed to parse JSON:", json.get_error_message())
-				return
-
-			var prov_stats = json.data
-
-			# Debug prints
-			print(Info_bank.HoveredNation)
-			print(Info_bank.HoveredNationColour)
-			print(Info_bank.ControlledNation)
-			print(Info_bank.ControlledNationColour)
-
-			# Modify the data
-			prov_stats["countrie_color"] = Info_bank.ControlledNationColour
-			prov_stats["province_controller"] = Info_bank.ControlledNation
-
-			print(prov_stats)
-
-			# Now reopen the file in WRITE mode to save the changes
-			prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
-			if prov_file == null:
-				print("Failed to open file for writing:", prov_res)
-				return
-
-			# Write updated JSON to file
-			prov_file.store_string(JSON.stringify(prov_stats, "\t"))  # "\t" = pretty print
-			prov_file.close()
-
-			print("Province JSON updated successfully.")
-
-		PopupIds.Set_controlled_nation:
-			
-			
-			Info_bank.ControlledNation = Info_bank.HoveredNation
-			Info_bank.ControlledNationColour = Info_bank.HoveredNationColour
-			
-		PopupIds.Create_army:
-			army_num += 1
-			var army_base_data = {
-				"army_tag" : "1"
-				
-			}
-			
-			var scene_to_instantiate = load("res://Map_data/armies/army.tscn")
-			var new_scene = scene_to_instantiate.instantiate()
-			add_child(new_scene)
-			new_scene.position = _last_mouse_position
-			Info_bank.name_of_army_file = "army" + str(army_num)
-			var json_string = JSON.stringify(army_base_data, "\t")
-			
-			var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(army_num) + ".json", FileAccess.WRITE)
-			army_file.store_string(json_string)
-			army_file.close()
-		PopupIds.army_menu_popup:
-			print("army menu")
-			var army_menu = load("res://Scenes/unit_menu.tscn")
-			if Info_bank.army_menu_is_active == false:
-				if Info_bank.something_selected == true:
-					
-					var new_scene = army_menu.instantiate()
-					selected_army_menu = new_scene
-					add_child(new_scene)
-					new_scene.position = _last_mouse_position
-					Info_bank.army_menu_is_active = true
-					print(selected_army_menu)
-			else:
-				
-				selected_army_menu.queue_free()
-				Info_bank.army_menu_is_active = false
-
-
-func _on_popup_menu_index_pressed(index: ) -> void:
-	pass # Replace with function body.

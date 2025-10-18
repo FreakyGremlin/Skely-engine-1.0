@@ -1,8 +1,9 @@
 {
 	"countrie_color": "889cff",
 	"name": "Zeeland",
-	"prov_tag": "ZEE",
+	"prov_tag": "POL",
 	"province_controller": "FRI",
-	"province_ids": ["@Polygon2D@18"]
+	"unit_marker" : [388.5, 508.0],
+	"province_ids": ["@Polygon2D@20"]
 	
 }

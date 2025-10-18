@@ -2,5 +2,7 @@
 	"countrie_color": "8d9c57",
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
-	"province_controller": "CLV"
+	"province_controller": "CLV",
+	"unit_marker" : [351.5, 372.375],
+	"province_ids": ["@Polygon2D@56"]
 }

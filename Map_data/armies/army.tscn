@@ -11,22 +11,25 @@ size = Vector2(70, 95)
 scale = Vector2(0.346111, 0.34602)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.77, 0.77)
 texture = ExtResource("1_dk4fx")
 script = ExtResource("2_3co52")
 
 [node name="Button" type="Button" parent="Sprite2D"]
-offset_left = 40.4495
-offset_top = -43.3501
-offset_right = 91.4494
-offset_bottom = -12.3501
+offset_left = 115.57
+offset_top = -115.6
+offset_right = 166.57
+offset_bottom = -84.6003
+scale = Vector2(2.26, 2.26)
 text = "move"
 metadata/_edit_use_anchors_ = true
 
 [node name="Button2" type="Button" parent="Sprite2D"]
-offset_left = 43.3387
-offset_top = 2.89
-offset_right = 94.3387
-offset_bottom = 33.89
+offset_left = 115.57
+offset_top = 7.70668
+offset_right = 219.57
+offset_bottom = 38.7067
+scale = Vector2(2.26, 2.26)
 text = "add infantry"
 metadata/_edit_use_anchors_ = true
 
@@ -37,11 +40,27 @@ position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_3co52")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(0, -56)
+position = Vector2(0, -100.187)
 rotation = 3.14159
-scale = Vector2(1.12, -0.966)
+scale = Vector2(2.835, -2.445)
 texture = ExtResource("3_aa882")
 metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+offset_left = 86.0
+offset_top = -218.0
+offset_right = 2528.0
+offset_bottom = 85.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/normal_font_size = 221
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Sprite2D"]
+offset_left = 86.3022
+offset_top = -187.663
+offset_right = 2528.3
+offset_bottom = 115.337
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/normal_font_size = 221
 
 [connection signal="child_entered_tree" from="." to="Sprite2D" method="_on_node_2d_child_entered_tree"]
 [connection signal="pressed" from="Sprite2D/Button" to="Sprite2D" method="_on_button_pressed"]

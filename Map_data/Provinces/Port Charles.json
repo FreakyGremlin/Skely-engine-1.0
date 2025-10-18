@@ -4,5 +4,6 @@
 	"prov_tag": "ZEE",
 	"province_controller": "LIG",
 	"manpower": 12375,
-	"province_ids": ["@Polygon2D@34"]
+	"unit_marker" : [565.0, 428.6666],
+	"province_ids": ["@Polygon2D@38"]
 }

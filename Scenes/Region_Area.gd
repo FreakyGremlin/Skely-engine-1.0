@@ -36,7 +36,7 @@ func _on_child_entered_tree(node):
 		else:
 			push_error("Parsed JSON is not a dictionary. Check the file content.")
 	else:
-		push_error("Failed to open file: " + prov_res)
+		push_error("Failed to open file: " + prov_res)  
 
 func update_tiles():
 	var root = get_tree().get_root()
@@ -109,7 +109,6 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	var Province_data = str(region_name) + ".json"
-	print(region_name)
 	var prov_res = "res://Map_data/Provinces/" + Province_data
 	var prov_file := FileAccess.open(prov_res, FileAccess.READ)
 	if prov_file:

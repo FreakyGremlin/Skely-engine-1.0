@@ -4,7 +4,8 @@
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "CLV",
+	"unit_marker" : [383.0, 322.125],
 	"province_ids": [
-		"@Polygon2D@52"
+		"@Polygon2D@62"
 	]
 }

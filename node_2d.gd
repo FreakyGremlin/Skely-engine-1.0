@@ -9,7 +9,6 @@ func _on_button_1_pressed() -> void:
 	Info_bank.main_menu_is_active = false
 
 func _on_button_2_pressed() -> void:
-	print("test")
 	# Get the hovered province name
 	var HoveredProvince = Info_bank.selected_prov
 
@@ -84,6 +83,7 @@ func _on_button_3_pressed() -> void:
 
 
 func _on_button_4_pressed() -> void:
+	var canvas_layer: CanvasLayer = null
 	Info_bank.army_num += 1
 	Info_bank.name_of_current_army_file = "army" + str(Info_bank.army_num)
 	var army_base_data = {
@@ -92,13 +92,13 @@ func _on_button_4_pressed() -> void:
 		"tile_located_on" : Info_bank.selected_prov_name
 		
 	}
+
+	Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)
+	var json_string = JSON.stringify(army_base_data, "\t")
+	var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(Info_bank.army_num) + ".json", FileAccess.WRITE)
+	print("file created")
+	army_file.store_string(json_string)
+	army_file.close()
 	var scene_to_instantiate = load("res://Map_data/armies/army.tscn")
 	var new_scene = scene_to_instantiate.instantiate()
 	get_tree().get_root().get_child(1).add_child(new_scene)
-	new_scene.global_position = Info_bank.last_mouse_position
-	Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)
-	var json_string = JSON.stringify(army_base_data, "\t")
-	
-	var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(Info_bank.army_num) + ".json", FileAccess.WRITE)
-	army_file.store_string(json_string)
-	army_file.close()

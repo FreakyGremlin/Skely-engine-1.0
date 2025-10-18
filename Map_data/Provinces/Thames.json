@@ -2,9 +2,10 @@
 	"countrie_color": "889cff",
 	"manpower": 12375.0,
 	"name": "Zeeland",
-	"prov_tag": "ZEE",
+	"prov_tag": "TAM",
 	"province_controller": "FRI",
+	"unit_marker" : [564.0, 477.6666],
 	"province_ids": [
-		"@Polygon2D@28"
+		"@Polygon2D@30"
 	]
 }
