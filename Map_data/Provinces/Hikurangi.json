@@ -1,6 +1,7 @@
 {
 	"countrie_color": "8d9c57",
 	"name": "Zeeland",
+	"has_army" : false,
 	"prov_tag": "ZEE",
 	"province_controller": "CLV",
 	"province_ids": [

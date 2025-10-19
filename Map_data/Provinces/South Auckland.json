@@ -1,5 +1,6 @@
 {
 	"countrie_color": "889cff",
+	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
@@ -9,6 +10,7 @@
 		"@Polygon2D@10",
 		"@Polygon2D@12"
 	],
+	"tile_located_on": "South Auckland.json",
 	"unit_marker": [
 		435.25,
 		455.75

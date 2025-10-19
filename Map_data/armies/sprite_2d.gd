@@ -41,16 +41,11 @@ func loaded_in():
 	is_selected = false
 	name_of_army_file = Info_bank.name_of_current_army_file
 	tile_located_on = Info_bank.selected_prov
-	print(tile_located_on + " tile located on")
-	print(name_of_army_file)
 	var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
-	print(army_res)
 	var army_file = FileAccess.open(army_res, FileAccess.READ)
 	var army_text = army_file.get_as_text()
 	var army_parse = JSON.parse_string(army_text)
 	var infanty_num_for_label = army_parse.get("infantry_num")
-	print(infanty_num_for_label)
-	print(infantry_num_label)
 	$RichTextLabel.text = str(infanty_num_for_label*10)
 	var full_name = tile_located_on
 	var dot_index = full_name.rfind(".")
@@ -64,10 +59,7 @@ func loaded_in():
 	var prov_text = prov_file.get_as_text()
 	var prov_parse = JSON.parse_string(prov_text)
 	var prov_marker = prov_parse.get("unit_marker")
-	print(prov_marker)
 	scene_root.position = Vector2(prov_marker[0], prov_marker[1])
-	print(position)
-	print(global_position)
 func _on_node_2d_child_entered_tree(node: Node) -> void:
 	loaded_in()
 

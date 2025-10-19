@@ -83,22 +83,38 @@ func _on_button_3_pressed() -> void:
 
 
 func _on_button_4_pressed() -> void:
-	var canvas_layer: CanvasLayer = null
-	Info_bank.army_num += 1
-	Info_bank.name_of_current_army_file = "army" + str(Info_bank.army_num)
-	var army_base_data = {
-		"army_tag" : "1",
-		"infantry_num" : 0,
-		"tile_located_on" : Info_bank.selected_prov_name
+	var prov_res = "res://Map_data/Provinces/" + Info_bank.selected_prov
+	var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+	var prov_text = prov_file.get_as_text()
+	prov_file.close()
+	var prov_parse = JSON.parse_string(prov_text)
+	var tile_has_army = prov_parse.get("has_army")
+	print(tile_has_army)
+	if tile_has_army == false:
+		prov_parse["has_army"] = true
+		var prov_string = JSON.stringify(prov_parse, "\t")
+		print(prov_parse)
 		
-	}
+		var canvas_layer: CanvasLayer = null
+		Info_bank.army_num += 1
+		Info_bank.name_of_current_army_file = "army" + str(Info_bank.army_num)
+		var army_base_data = {
+			"army_tag" : "1",
+			"infantry_num" : 0,
+			"tile_located_on" : Info_bank.selected_prov_name
+			
+		}
+		Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)
+		var json_string = JSON.stringify(army_base_data, "\t")
+		var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(Info_bank.army_num) + ".json", FileAccess.WRITE)
+		army_file.store_string(json_string)
+		army_file.close()
+		var scene_to_instantiate = load("res://Map_data/armies/army.tscn")
+		var new_scene = scene_to_instantiate.instantiate()
+		prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
+		prov_file.store_string(prov_string)
+		prov_file.close()
 
-	Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)
-	var json_string = JSON.stringify(army_base_data, "\t")
-	var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(Info_bank.army_num) + ".json", FileAccess.WRITE)
-	print("file created")
-	army_file.store_string(json_string)
-	army_file.close()
-	var scene_to_instantiate = load("res://Map_data/armies/army.tscn")
-	var new_scene = scene_to_instantiate.instantiate()
-	get_tree().get_root().get_child(1).add_child(new_scene)
+		
+		get_tree().get_root().get_child(1).add_child(new_scene)
+		
