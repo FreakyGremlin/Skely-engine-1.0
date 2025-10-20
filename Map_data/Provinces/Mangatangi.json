@@ -1,6 +1,11 @@
 {
-	"has_army" : false,
+	"bordered_provs": [
+		"Meremere",
+		"Ness",
+		"Mangatarata"
+	],
 	"countrie_color": "889cff",
+	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "MAN",

@@ -21,3 +21,4 @@ var new_scene: Node = null
 @onready var root_scene_node : Node = $"."
 var name_of_current_army_file = ""
 var army_num = 0
+var region_name = ""

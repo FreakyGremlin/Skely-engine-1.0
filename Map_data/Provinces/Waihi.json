@@ -1,9 +1,19 @@
 {
-	"has_army" : false,
+	"bordered_provs": [
+		"Mangatarata",
+		"Thames",
+		"Pauanui"
+	],
 	"countrie_color": "2f6d57",
+	"has_army": false,
 	"name": "Zeeland",
 	"prov_tag": "WAH",
 	"province_controller": "LIG",
-	"unit_marker" : [593.6666, 508.6666],
-	"province_ids": ["@Polygon2D@28"]
+	"province_ids": [
+		"@Polygon2D@28"
+	],
+	"unit_marker": [
+		593.6666,
+		508.6666
+	]
 }

@@ -1,10 +1,19 @@
 {
-	"has_army" : false,
+	"bordered_provs": [
+		"Manaia",
+		"Pauanui"
+	],
 	"countrie_color": "2f6d57",
+	"has_army": false,
+	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "LIG",
-	"manpower": 12375,
-	"unit_marker" : [565.0, 428.6666],
-	"province_ids": ["@Polygon2D@38"]
+	"province_ids": [
+		"@Polygon2D@38"
+	],
+	"unit_marker": [
+		565.0,
+		428.6666
+	]
 }

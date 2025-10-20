@@ -1,11 +1,15 @@
 {
-	"has_army" : false,
+	"bordered_provs": [],
 	"countrie_color": "#ffffbe",
+	"has_army": false,
 	"name": "Zeeland",
 	"prov_tag": "WMT",
 	"province_controller": "AST",
-	"unit_marker" : [246.8, 232.4],
 	"province_ids": [
 		"@Polygon2D@88"
+	],
+	"unit_marker": [
+		246.8,
+		232.4
 	]
 }

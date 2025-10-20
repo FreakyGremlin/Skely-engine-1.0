@@ -37,7 +37,8 @@ func _ready():
 	$PopupMenu.set_item_disabled(4, true)
 	
 func _input(event):
-	
+	if Input.is_action_just_pressed("click_left"):
+		print(Info_bank.HoveredProvince)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
 		var main_menu = load("res://Scenes/main_menu.tscn")
 		_last_mouse_position = get_global_mouse_position()
@@ -88,15 +89,34 @@ func load_regions():
 	var image = mapImage.get_texture().get_image()
 	var pixel_color_dict = get_pixel_color_dict(image)
 	var regions_dict = import_file("res://Map_data/regions.txt")
-	
+	print(region_name)
 	for region_color in regions_dict:
+		
+		
+		
 		var region = load("res://Scenes/Region_Area.tscn").instantiate()
 		region.region_name = regions_dict[region_color]
+		Info_bank.region_name = region.region_name
 		region.set_name(region_color)
 		get_node("Regions").add_child(region)
-		
 		var polygons = get_polygons(image, region_color, pixel_color_dict)
-	
+		
+		var prov_res = "res://Map_data/Provinces/" + Info_bank.region_name + ".json"
+		
+		var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+		if prov_file:
+			var prov_text = prov_file.get_as_text()
+			prov_file.close()
+			var prov_parse = JSON.parse_string(prov_text)
+			prov_parse["has_army"] = false
+			prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
+			var prov_string = JSON.stringify(prov_parse, "\t")
+			prov_file.store_string(prov_string)
+			prov_file.close()
+		
+		
+		
+		
 		for polygon in polygons:
 			var region_collision = CollisionPolygon2D.new()
 			var region_polygon = Polygon2D.new()

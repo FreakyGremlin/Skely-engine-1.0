@@ -1,12 +1,20 @@
 {
-	"has_army" : false,
+	"bordered_provs": [
+		"Thames",
+		"Pauanui",
+		"Port Charles"
+	],
 	"countrie_color": "889cff",
+	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "FRI",
-	"unit_marker" : [557.3333, 448.3333],
 	"province_ids": [
 		"@Polygon2D@36"
+	],
+	"unit_marker": [
+		557.3333,
+		448.3333
 	]
 }

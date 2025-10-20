@@ -1,10 +1,21 @@
 {
-	"has_army" : false,
+	"bordered_provs": [
+		"Waihi",
+		"Thames",
+		"Manaia",
+		"Port Charles"
+	],
 	"countrie_color": "2f6d57",
+	"has_army": false,
+	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "LIG",
-	"manpower": 12375,
-	"unit_marker" : [593.0, 455.6666],
-	"province_ids": ["@Polygon2D@34"]
+	"province_ids": [
+		"@Polygon2D@34"
+	],
+	"unit_marker": [
+		593.0,
+		455.6666
+	]
 }

@@ -1,12 +1,16 @@
 {
+	"bordered_provs": [],
 	"countrie_color": "8d9c57",
-	"has_army" : false,
+	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "CLV",
-	"unit_marker" : [381.5, 406.875],
 	"province_ids": [
 		"@Polygon2D@52"
+	],
+	"unit_marker": [
+		381.5,
+		406.875
 	]
 }

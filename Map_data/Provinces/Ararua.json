@@ -1,11 +1,18 @@
 {
+	"bordered_provs": [],
 	"countrie_color": "#ffffbe",
-	"has_army" : false,
+	"has_army": false,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "AST",
-	"unit_marker" : [277.0, 270.2],
 	"province_ids": [
-		"@Polygon2D@76","@Polygon2D@78","@Polygon2D@80","@Polygon2D@82"
+		"@Polygon2D@76",
+		"@Polygon2D@78",
+		"@Polygon2D@80",
+		"@Polygon2D@82"
+	],
+	"unit_marker": [
+		277.0,
+		270.2
 	]
 }

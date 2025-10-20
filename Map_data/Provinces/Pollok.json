@@ -1,10 +1,18 @@
 {
-	"has_army" : false,
+	"bordered_provs": [
+		"Karaka",
+		"Onewhero"
+	],
 	"countrie_color": "889cff",
+	"has_army": false,
 	"name": "Zeeland",
 	"prov_tag": "POL",
 	"province_controller": "FRI",
-	"unit_marker" : [388.5, 508.0],
-	"province_ids": ["@Polygon2D@20"]
-	
+	"province_ids": [
+		"@Polygon2D@20"
+	],
+	"unit_marker": [
+		388.5,
+		508.0
+	]
 }

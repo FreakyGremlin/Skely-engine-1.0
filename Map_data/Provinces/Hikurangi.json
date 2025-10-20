@@ -1,7 +1,8 @@
 {
+	"bordered_provs": [],
 	"countrie_color": "8d9c57",
+	"has_army": false,
 	"name": "Zeeland",
-	"has_army" : false,
 	"prov_tag": "ZEE",
 	"province_controller": "CLV",
 	"province_ids": [

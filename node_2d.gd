@@ -83,6 +83,7 @@ func _on_button_3_pressed() -> void:
 
 
 func _on_button_4_pressed() -> void:
+	
 	var prov_res = "res://Map_data/Provinces/" + Info_bank.selected_prov
 	var prov_file = FileAccess.open(prov_res, FileAccess.READ)
 	var prov_text = prov_file.get_as_text()
