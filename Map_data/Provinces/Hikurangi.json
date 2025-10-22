@@ -1,5 +1,10 @@
 {
-	"bordered_provs": [],
+	"bordered_provs": [
+		"Waipu",
+		"Ararua",
+		"Waimatenui",
+		"Kawakawa"
+	],
 	"countrie_color": "8d9c57",
 	"has_army": false,
 	"name": "Zeeland",

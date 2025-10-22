@@ -1,5 +1,10 @@
 {
-	"bordered_provs": [],
+	"bordered_provs": [
+		"Wharehine",
+		"Mangawhai",
+		"Brynderwyn",
+		"Ararua"
+	],
 	"countrie_color": "#ffffbe",
 	"has_army": false,
 	"name": "Zeeland",

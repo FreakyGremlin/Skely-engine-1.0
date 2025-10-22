@@ -3,6 +3,7 @@ var region_name = ""
 var _last_mouse_position
 var selected_nation_name 
 @onready var _pm = $PopupMenu
+var poly_num = 0
 var prov_stats = {
 "prov_tag": "",
 "name": "",
@@ -20,6 +21,9 @@ enum PopupIds {
 	Nation_name,
 	army_menu_popup
 }
+
+var bordered_array_string : Array[String] = []
+
 var new_scene : Node
 @onready var mapImage = $RegionMap
 # Called when the node enters the scene tree for the first time.
@@ -39,6 +43,22 @@ func _ready():
 func _input(event):
 	if Input.is_action_just_pressed("click_left"):
 		print(Info_bank.HoveredProvince)
+		bordered_array_string.append(Info_bank.HoveredProvinceName)
+	if Input.is_action_just_pressed("remove_id_in_array"):
+		bordered_array_string.remove_at(0)
+	if Input.is_action_just_pressed("commit_edits_to_file"):
+		var prov_res = "res://Map_data/Provinces/" + Info_bank.HoveredProvince
+		var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+		var prov_text = prov_file.get_as_text()
+		prov_file.close()
+		var prov_parse = JSON.parse_string(prov_text)
+		prov_parse["bordered_provs"] = bordered_array_string
+		var prov_string = JSON.stringify(prov_parse, "\t")
+		prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
+		prov_file.store_string(prov_string)
+		prov_file.close()
+		for id in bordered_array_string:
+			bordered_array_string.remove_at(0)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
 		var main_menu = load("res://Scenes/main_menu.tscn")
 		_last_mouse_position = get_global_mouse_position()
@@ -84,6 +104,7 @@ func _process(delta):
 	hovered_nation_name = Info_bank.full_nation_name
 	$PopupMenu.set_item_text(4, hovered_nation_name)
 	pass
+	$CanvasLayer/RichTextLabel.text = str(bordered_array_string)
 func load_regions():
 	#loads the map texture and sets the provinces
 	var image = mapImage.get_texture().get_image()
@@ -118,8 +139,12 @@ func load_regions():
 		
 		
 		for polygon in polygons:
+			poly_num += 1
 			var region_collision = CollisionPolygon2D.new()
 			var region_polygon = Polygon2D.new()
+			region_polygon.name = region.region_name + str(poly_num)
+			
+			
 			
 			region_collision.polygon = polygon
 			region_polygon.polygon = polygon

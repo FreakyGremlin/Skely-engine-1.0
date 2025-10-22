@@ -1,5 +1,11 @@
 {
-	"bordered_provs": [],
+	"bordered_provs": [
+		"Te Rau Puriri",
+		"Glenfield",
+		"Silverdale",
+		"Warkworth",
+		"Wharehine"
+	],
 	"countrie_color": "8d9c57",
 	"has_army": false,
 	"name": "Zeeland",

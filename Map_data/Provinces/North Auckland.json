@@ -1,5 +1,9 @@
 {
-	"bordered_provs": [],
+	"bordered_provs": [
+		"South Auckland",
+		"Te Rau Puriri",
+		"Karekare"
+	],
 	"countrie_color": "889cff",
 	"has_army": false,
 	"manpower": 12375.0,

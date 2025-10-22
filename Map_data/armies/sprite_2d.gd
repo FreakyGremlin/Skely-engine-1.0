@@ -99,6 +99,7 @@ func update_army_file():
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("click_left"):
+		
 		if move_menu_is_open == true:
 			
 			var scene_root = $".."
@@ -120,6 +121,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_button_pressed() -> void:
 	if is_selected == true:
+		
 		if move_menu_is_open == false:
 			print("menu active")
 			add_infantry_button.visible = false

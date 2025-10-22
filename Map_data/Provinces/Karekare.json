@@ -1,5 +1,8 @@
 {
-	"bordered_provs": [],
+	"bordered_provs": [
+		"North Auckland",
+		"Te Rau Puriri"
+	],
 	"countrie_color": "889cff",
 	"has_army": false,
 	"manpower": 12375.0,

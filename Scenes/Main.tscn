@@ -23,5 +23,9 @@ texture = ExtResource("4_rgh2o")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_right = 273.0
+offset_bottom = 105.0
+
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]
 [connection signal="index_pressed" from="PopupMenu" to="." method="_on_popup_menu_index_pressed"]

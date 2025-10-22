@@ -1,5 +1,9 @@
 {
-	"bordered_provs": [],
+	"bordered_provs": [
+		"Brynderwyn",
+		"Ararua",
+		"Hikurangi"
+	],
 	"countrie_color": "8d9c57",
 	"has_army": false,
 	"manpower": 12375.0,

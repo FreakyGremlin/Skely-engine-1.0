@@ -1,11 +1,15 @@
 {
-	"bordered_provs": [],
-	"countrie_color": "8d9c57",
+	"bordered_provs": [
+		"Glenfield",
+		"Tahekeroa",
+		"Warkworth"
+	],
+	"countrie_color": "889cff",
 	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
-	"province_controller": "CLV",
+	"province_controller": "FRI",
 	"province_ids": [
 		"@Polygon2D@54"
 	],
