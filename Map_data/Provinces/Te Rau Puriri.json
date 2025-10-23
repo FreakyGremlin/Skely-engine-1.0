@@ -12,9 +12,9 @@
 	"prov_tag": "ZEE",
 	"province_controller": "FRI",
 	"province_ids": [
-		"@Polygon2D@46",
-		"@Polygon2D@48",
-		"@Polygon2D@50"
+		"Te Rau Puriri1",
+		"Te Rau Puriri2",
+		"Te Rau Puriri3"
 	],
 	"unit_marker": [
 		348.75,

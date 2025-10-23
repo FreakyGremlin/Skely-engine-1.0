@@ -4,14 +4,14 @@
 		"Ness",
 		"Mangatarata"
 	],
-	"countrie_color": "2f6d57",
+	"countrie_color": "889cff",
 	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "MAN",
-	"province_controller": "LIG",
+	"province_controller": "FRI",
 	"province_ids": [
-		"@Polygon2D@16"
+		"Mangatangi1"
 	],
 	"unit_marker": [
 		493.25,

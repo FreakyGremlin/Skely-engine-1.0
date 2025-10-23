@@ -11,8 +11,7 @@
 	"prov_tag": "KAI",
 	"province_controller": "AST",
 	"province_ids": [
-		"@Polygon2D@66",
-		"@Polygon2D@68"
+		"Kaiwaka1"
 	],
 	"unit_marker": [
 		330.4,

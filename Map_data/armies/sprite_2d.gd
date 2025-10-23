@@ -101,7 +101,8 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("click_left"):
 		
 		if move_menu_is_open == true:
-			
+			var cur_prov_res = "res://Map_data/armies/" + name_of_army_file
+			var cur_prov_file = FileAccess.open(cur_prov_res, FileAccess.READ)
 			var scene_root = $".."
 			# Read province data
 			var prov_res = "res://Map_data/Provinces/" + Info_bank.HoveredProvince
@@ -133,15 +134,13 @@ func _on_button_pressed() -> void:
 
 func _on_button_2_pressed() -> void:
 	var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
-	print(name_of_army_file)
+	
 	var army_file = FileAccess.open(army_res, FileAccess.READ)
 	var army_text = army_file.get_as_text()
 	army_file.close
 	var army_parse = JSON.parse_string(army_text)
 	infantry_num += 1
 	army_parse["infantry_num"] = infantry_num
-	print(infantry_num)
-	print(army_parse)
 	$RichTextLabel.text = str(infantry_num * 1000)
 	army_file = FileAccess.open(army_res, FileAccess.WRITE)
 	army_file.store_string(JSON.stringify(army_parse, "\t"))

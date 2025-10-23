@@ -22,3 +22,4 @@ var new_scene: Node = null
 var name_of_current_army_file = ""
 var army_num = 0
 var region_name = ""
+var debug_mode_on = false

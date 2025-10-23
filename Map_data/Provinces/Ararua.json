@@ -13,10 +13,8 @@
 	"prov_tag": "ZEE",
 	"province_controller": "AST",
 	"province_ids": [
-		"@Polygon2D@76",
-		"@Polygon2D@78",
-		"@Polygon2D@80",
-		"@Polygon2D@82"
+		"Ararua1",
+		"Ararua2"
 	],
 	"unit_marker": [
 		277.0,

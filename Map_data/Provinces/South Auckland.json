@@ -11,9 +11,9 @@
 	"prov_tag": "ZEE",
 	"province_controller": "FRI",
 	"province_ids": [
-		"@Polygon2D@8",
-		"@Polygon2D@10",
-		"@Polygon2D@12"
+		"South Auckland1",
+		"South Auckland2",
+		"South Auckland3"
 	],
 	"tile_located_on": "South Auckland.json",
 	"unit_marker": [

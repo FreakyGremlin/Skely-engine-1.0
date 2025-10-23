@@ -73,6 +73,7 @@ func _on_mouse_entered():
 	var Province_data = str(region_name) + ".json" 
 	Info_bank.HoveredProvince = Province_data
 	Info_bank.HoveredProvinceName = region_name
+	print(Info_bank.HoveredProvince)
 	for node in get_children():
 		if node.is_class("Polygon2D"):
 			node.color = Color(1,1,1,1)

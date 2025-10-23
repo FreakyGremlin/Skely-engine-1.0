@@ -11,8 +11,8 @@
 	"prov_tag": "ZEE",
 	"province_controller": "FRI",
 	"province_ids": [
-		"@Polygon2D@40",
-		"@Polygon2D@42"
+		"North Auckland1",
+		"North Auckland2"
 	],
 	"unit_marker": [
 		400.5,

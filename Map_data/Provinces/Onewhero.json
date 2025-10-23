@@ -5,12 +5,12 @@
 		"Meremere"
 	],
 	"countrie_color": "889cff",
-	"has_army": false,
+	"has_army": true,
 	"name": "Zeeland",
 	"prov_tag": "ONW",
 	"province_controller": "FRI",
 	"province_ids": [
-		"@Polygon2D@22"
+		"Onewhero1"
 	],
 	"unit_marker": [
 		411.25,

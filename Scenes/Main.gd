@@ -21,7 +21,7 @@ enum PopupIds {
 	Nation_name,
 	army_menu_popup
 }
-
+var poly_num_for_array = 1
 var bordered_array_string : Array[String] = []
 
 var new_scene : Node
@@ -41,24 +41,32 @@ func _ready():
 	$PopupMenu.set_item_disabled(4, true)
 	
 func _input(event):
-	if Input.is_action_just_pressed("click_left"):
-		print(Info_bank.HoveredProvince)
-		bordered_array_string.append(Info_bank.HoveredProvinceName)
-	if Input.is_action_just_pressed("remove_id_in_array"):
-		bordered_array_string.remove_at(0)
-	if Input.is_action_just_pressed("commit_edits_to_file"):
-		var prov_res = "res://Map_data/Provinces/" + Info_bank.HoveredProvince
-		var prov_file = FileAccess.open(prov_res, FileAccess.READ)
-		var prov_text = prov_file.get_as_text()
-		prov_file.close()
-		var prov_parse = JSON.parse_string(prov_text)
-		prov_parse["bordered_provs"] = bordered_array_string
-		var prov_string = JSON.stringify(prov_parse, "\t")
-		prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
-		prov_file.store_string(prov_string)
-		prov_file.close()
-		for id in bordered_array_string:
+	if Input.is_action_just_pressed("test_imput_2"):
+		if Info_bank.debug_mode_on == false:
+			Info_bank.debug_mode_on = true
+		else:
+			Info_bank.debug_mode_on = false
+	if Info_bank.debug_mode_on == true:
+		if Input.is_action_just_pressed("click_left"):
+			print(Info_bank.HoveredProvince)
+			bordered_array_string.append(Info_bank.HoveredProvinceName + str(poly_num_for_array))
+			poly_num_for_array += 1
+		if Input.is_action_just_pressed("remove_id_in_array"):
 			bordered_array_string.remove_at(0)
+		if Input.is_action_just_pressed("commit_edits_to_file"):
+			poly_num_for_array = 1
+			var prov_res = "res://Map_data/Provinces/" + Info_bank.HoveredProvince
+			var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+			var prov_text = prov_file.get_as_text()
+			prov_file.close()
+			var prov_parse = JSON.parse_string(prov_text)
+			prov_parse["province_ids"] = bordered_array_string
+			var prov_string = JSON.stringify(prov_parse, "\t")
+			prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
+			prov_file.store_string(prov_string)
+			prov_file.close()
+			for id in bordered_array_string:
+				bordered_array_string.remove_at(0)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
 		var main_menu = load("res://Scenes/main_menu.tscn")
 		_last_mouse_position = get_global_mouse_position()
@@ -94,11 +102,6 @@ func _input(event):
 	var Province_data = str(region_name) + ".json"
 
 	
-	if Input.is_action_just_pressed("test_imput_1"):
-		var scene_to_instantiate = load("res://Scenes/province_menu.tscn")
-		var new_scene = scene_to_instantiate.instantiate()
-		add_child(new_scene)
-		new_scene.position = _last_mouse_position
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	hovered_nation_name = Info_bank.full_nation_name
@@ -112,7 +115,7 @@ func load_regions():
 	var regions_dict = import_file("res://Map_data/regions.txt")
 	print(region_name)
 	for region_color in regions_dict:
-		
+		poly_num = 0
 		
 		
 		var region = load("res://Scenes/Region_Area.tscn").instantiate()
@@ -121,7 +124,7 @@ func load_regions():
 		region.set_name(region_color)
 		get_node("Regions").add_child(region)
 		var polygons = get_polygons(image, region_color, pixel_color_dict)
-		
+		print(region.region_name + "region")
 		
 		
 		
@@ -142,6 +145,7 @@ func load_regions():
 		
 		
 		for polygon in polygons:
+			
 			poly_num += 1
 			var region_collision = CollisionPolygon2D.new()
 			var region_polygon = Polygon2D.new()

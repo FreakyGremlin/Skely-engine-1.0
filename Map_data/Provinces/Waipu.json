@@ -11,8 +11,8 @@
 	"prov_tag": "WAI",
 	"province_controller": "CLV",
 	"province_ids": [
-		"@Polygon2D@72",
-		"@Polygon2D@74"
+		"Waipu1",
+		"Waipu2"
 	],
 	"unit_marker": [
 		315.6,
