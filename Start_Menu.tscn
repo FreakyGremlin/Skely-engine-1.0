@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cq06i48qid6om"]
+[gd_scene load_steps=6 format=3 uid="uid://cq06i48qid6om"]
+
+[ext_resource type="Script" uid="uid://dd1tplh02h4l2" path="res://start_menu.gd" id="1_wrxjg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4o0td"]
 bg_color = Color(1, 1, 1, 1)
@@ -21,6 +23,8 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4o0td"]
+
 [node name="StartMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -28,6 +32,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wrxjg")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -56,28 +61,44 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
 theme_override_styles/normal = SubResource("StyleBoxFlat_4o0td")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wrxjg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pbjr1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4o0td")
 text = "Start Game"
 
 [node name="Button2" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
 theme_override_styles/normal = SubResource("StyleBoxFlat_4o0td")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wrxjg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pbjr1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4o0td")
 text = "Options"
 
 [node name="Button3" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 27
 theme_override_styles/normal = SubResource("StyleBoxFlat_4o0td")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wrxjg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pbjr1")
-text = "Exit"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4o0td")
+text = "Exit Game"
+
+[connection signal="pressed" from="VBoxContainer/Button4" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_exit_pressed"]
