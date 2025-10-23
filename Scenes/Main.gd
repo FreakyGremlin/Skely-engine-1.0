@@ -122,6 +122,9 @@ func load_regions():
 		get_node("Regions").add_child(region)
 		var polygons = get_polygons(image, region_color, pixel_color_dict)
 		
+		
+		
+		
 		var prov_res = "res://Map_data/Provinces/" + Info_bank.region_name + ".json"
 		
 		var prov_file = FileAccess.open(prov_res, FileAccess.READ)
