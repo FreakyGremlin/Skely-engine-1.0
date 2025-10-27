@@ -27,6 +27,7 @@ func _on_child_entered_tree(node):
 			var nation_name = prov_controller + ".json"
 			var Nation_info = "res://Map_data/nations/" + nation_name
 			var nation_file = FileAccess.open(Nation_info, FileAccess.READ)
+			print(region_name + "      get as text")
 			var nation_text = nation_file.get_as_text()
 			var parsed_nat_text = JSON.parse_string(nation_text)
 			var nation_color = parsed_nat_text.get("Nation_color", "nation color not found")
@@ -43,7 +44,7 @@ func update_tiles():
 	_recursive_update_tiles(root)
 
 func _recursive_update_tiles(node):
-	var Province_data = Info_bank.HoveredProvince
+	var Province_data = Info_bank.selected_tile
 	print(Info_bank.HoveredProvince)
 	var prov_res = "res://Map_data/Provinces/" + Province_data
 	var prov_file := FileAccess.open(prov_res, FileAccess.READ)

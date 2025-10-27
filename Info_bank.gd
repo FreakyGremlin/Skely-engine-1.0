@@ -17,6 +17,7 @@ var main_menu = ""
 var region_gd_ref = ""
 var selected_prov = ""
 var selected_prov_name = ""
+var selected_tile = ""
 var new_scene: Node = null
 @onready var root_scene_node : Node = $"."
 var name_of_current_army_file = ""

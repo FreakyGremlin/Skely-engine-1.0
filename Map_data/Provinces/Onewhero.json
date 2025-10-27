@@ -5,7 +5,7 @@
 		"Meremere"
 	],
 	"countrie_color": "889cff",
-	"has_army": true,
+	"has_army": false,
 	"name": "Zeeland",
 	"prov_tag": "ONW",
 	"province_controller": "FRI",

@@ -33,6 +33,14 @@ scale = Vector2(2.26, 2.26)
 text = "add infantry"
 metadata/_edit_use_anchors_ = true
 
+[node name="Button3" type="Button" parent="Sprite2D"]
+offset_left = -315.19052
+offset_right = -211.19052
+offset_bottom = 31.000021
+scale = Vector2(2.26, 2.26)
+text = "annex"
+metadata/_edit_use_anchors_ = true
+
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
@@ -73,5 +81,6 @@ theme_override_font_sizes/normal_font_size = 221
 [connection signal="child_entered_tree" from="." to="Sprite2D" method="_on_node_2d_child_entered_tree"]
 [connection signal="pressed" from="Sprite2D/Button" to="Sprite2D" method="_on_button_pressed"]
 [connection signal="pressed" from="Sprite2D/Button2" to="Sprite2D" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Sprite2D/Button3" to="Sprite2D" method="_on_button_3_pressed"]
 [connection signal="input_event" from="Sprite2D/Area2D" to="Sprite2D" method="_on_area_2d_input_event"]
 [connection signal="child_entered_tree" from="Sprite2D/Sprite2D2" to="Sprite2D" method="_on_sprite_2d_2_child_entered_tree"]

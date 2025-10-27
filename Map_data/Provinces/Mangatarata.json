@@ -4,12 +4,12 @@
 		"Thames",
 		"Waihi"
 	],
-	"countrie_color": "2f6d57",
+	"countrie_color": "889cff",
 	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "MNG",
-	"province_controller": "LIG",
+	"province_controller": "FRI",
 	"province_ids": [
 		"Mangatarata1"
 	],
