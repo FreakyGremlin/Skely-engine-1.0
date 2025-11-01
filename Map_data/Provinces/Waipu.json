@@ -4,12 +4,12 @@
 		"Ararua",
 		"Hikurangi"
 	],
-	"countrie_color": "8d9c57",
+	"countrie_color": "#ffffbe",
 	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "WAI",
-	"province_controller": "CLV",
+	"province_controller": "AST",
 	"province_ids": [
 		"Waipu1",
 		"Waipu2"

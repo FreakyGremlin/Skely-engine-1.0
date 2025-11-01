@@ -40,7 +40,17 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 				is_selected = true
 				Info_bank.something_selected = true
 				Info_bank.selected_thing = self
-				
+				var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
+				var army_file = FileAccess.open(army_res, FileAccess.READ)
+				var army_text = army_file.get_as_text()
+				army_file.close()
+				var army_parse = JSON.parse_string(army_text)
+				var army_num = army_parse.get("infantry_num", 0)
+				infantry_num = army_num
+				print(army_text)
+				print(army_parse)
+				print(army_num)
+				print(str(infantry_num) + " infantry")
 		else:
 			if not cur_prov_controller == prov_controller:
 				annex_button.visible = false
@@ -59,6 +69,7 @@ func loaded_in():
 	var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
 	var army_file = FileAccess.open(army_res, FileAccess.READ)
 	var army_text = army_file.get_as_text()
+	army_file.close()
 	var army_parse = JSON.parse_string(army_text)
 	var infanty_num_for_label = army_parse.get("infantry_num")
 	$RichTextLabel.text = str(infanty_num_for_label*10)
@@ -72,6 +83,7 @@ func loaded_in():
 	var prov_res = "res://Map_data/Provinces/" + tile_located_on
 	var prov_file = FileAccess.open(prov_res, FileAccess.READ)
 	var prov_text = prov_file.get_as_text()
+	prov_file.close()
 	var prov_parse = JSON.parse_string(prov_text)
 	var prov_marker = prov_parse.get("unit_marker")
 	scene_root.position = Vector2(prov_marker[0], prov_marker[1])
@@ -123,6 +135,7 @@ func _input(event: InputEvent) -> void:
 			var cur_prov_parse = JSON.parse_string(cur_prov_text)
 			var cur_border_provs = cur_prov_parse.get("bordered_provs")
 			cur_prov_controller = cur_prov_parse.get("province_controller")
+			cur_prov_parse["has_army"] = false
 			for id in cur_border_provs:
 				if Info_bank.HoveredProvinceName == id:
 					can_move_here = true
@@ -156,6 +169,10 @@ func _input(event: InputEvent) -> void:
 				tile_located_on = Info_bank.HoveredProvince
 				Info_bank.selected_tile = Info_bank.HoveredProvince
 				print(tile_located_on + "tile")
+				
+				cur_prov_file = FileAccess.open(cur_prov_res, FileAccess.WRITE)
+				cur_prov_file.store_string(JSON.stringify(cur_prov_parse, "\t"))
+				cur_prov_file.close()
 
 func _on_button_pressed() -> void:
 	if is_selected == true:
@@ -176,11 +193,11 @@ func _on_button_2_pressed() -> void:
 	
 	var army_file = FileAccess.open(army_res, FileAccess.READ)
 	var army_text = army_file.get_as_text()
-	army_file.close
+	army_file.close()
 	var army_parse = JSON.parse_string(army_text)
 	infantry_num += 1
 	army_parse["infantry_num"] = infantry_num
-	$RichTextLabel.text = str(infantry_num * 1000)
+	$RichTextLabel.text = str(infantry_num * 100)
 	army_file = FileAccess.open(army_res, FileAccess.WRITE)
 	army_file.store_string(JSON.stringify(army_parse, "\t"))
 	army_file.close()
@@ -190,51 +207,54 @@ func _on_button_2_pressed() -> void:
 
 
 func _on_button_3_pressed() -> void:
-# Get the hovered province name
 
-	# Build the path to the province JSON file
-	var prov_res = "res://Map_data/Provinces/" + tile_located_on
+	if infantry_num * 100 > 100:
+		
+	# Get the hovered province name
+		
+		# Build the path to the province JSON file
+		var prov_res = "res://Map_data/Provinces/" + tile_located_on
 
-	# Open the file in read mode first
-	var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+		# Open the file in read mode first
+		var prov_file = FileAccess.open(prov_res, FileAccess.READ)
 
-	if prov_file == null:
-		print("Failed to open file for reading:", prov_res)
-		return
+		if prov_file == null:
+			print("Failed to open file for reading:", prov_res)
+			return
 
-	# Read the file content and parse the JSON
-	var json_text = prov_file.get_as_text()
-	prov_file.close()  # Always close files when done
+		# Read the file content and parse the JSON
+		var json_text = prov_file.get_as_text()
+		prov_file.close()  # Always close files when done
 
-	# Parse JSON
-	var parse_result = JSON.parse_string(json_text)
+		# Parse JSON
+		var parse_result = JSON.parse_string(json_text)
 
 
-	var prov_stats = parse_result
+		var prov_stats = parse_result
 
-	# Debug prints
-	print(Info_bank.HoveredNation)
-	print(Info_bank.HoveredNationColour)
-	print(Info_bank.ControlledNation)
-	print(Info_bank.ControlledNationColour)
+		# Debug prints
+		print(Info_bank.HoveredNation)
+		print(Info_bank.HoveredNationColour)
+		print(Info_bank.ControlledNation)
+		print(Info_bank.ControlledNationColour)
 
-	# Modify the data
-	prov_stats["countrie_color"] = Info_bank.ControlledNationColour
-	prov_stats["province_controller"] = Info_bank.ControlledNation
+		# Modify the data
+		prov_stats["countrie_color"] = Info_bank.ControlledNationColour
+		prov_stats["province_controller"] = Info_bank.ControlledNation
 
-	print(prov_stats)
+		print(prov_stats)
 
-	# Now reopen the file in WRITE mode to save the changes
-	prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
-	if prov_file == null:
-		print("Failed to open file for writing:", prov_res)
-		return
+		# Now reopen the file in WRITE mode to save the changes
+		prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
+		if prov_file == null:
+			print("Failed to open file for writing:", prov_res)
+			return
 
-	# Write updated JSON to file
-	prov_file.store_string(JSON.stringify(prov_stats, "\t"))  # "\t" = pretty print
-	prov_file.close()
+		# Write updated JSON to file
+		prov_file.store_string(JSON.stringify(prov_stats, "\t"))  # "\t" = pretty print
+		prov_file.close()
 
-	print("Province JSON updated successfully.")
-	Info_bank.region_gd_ref.update_tiles()
+		print("Province JSON updated successfully.")
+		Info_bank.region_gd_ref.update_tiles()
 
-	Info_bank.main_menu_is_active = false
+		Info_bank.main_menu_is_active = false

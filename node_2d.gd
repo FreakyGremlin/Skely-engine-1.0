@@ -1,14 +1,19 @@
 extends Node2D
 var new_scene: Node = null
 func _enter_tree() -> void:
+	if Info_bank.ControlledNation == "":
+		print(Info_bank.ControlledNation)
 	if Info_bank.HoveredNation == Info_bank.ControlledNation:
 		$Button1.disabled = true
-		if Info_bank.ControlledNation != "":
-			$Button1/Button2.disabled = true
+		$Button1/Button2.disabled = true
+		$Button1/Button2.disabled = true
 		$Button1/Button2/Button4.disabled = false
 	else:
+		if Info_bank.ControlledNation == "":
+			$Button1/Button2.disabled = true
+		else:
+			$Button1/Button2.disabled = false
 		$Button1.disabled = false
-		$Button1/Button2.disabled = false
 		$Button1/Button2/Button4.disabled = true
 	
 	
