@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://lhibwfvewojv"]
+
+[ext_resource type="Script" uid="uid://cp5365qmvs5yp" path="res://Scenes/army_menu.gd" id="1_h7woh"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jtouy"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_h7woh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 656.0
+offset_bottom = 645.0
+texture = SubResource("NoiseTexture2D_jtouy")
+expand_mode = 3
+
+[node name="Button" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 191.0
+offset_right = 612.0
+offset_bottom = 286.0
+text = "Move"
+
+[node name="Button2" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 356.0
+offset_right = 612.0
+offset_bottom = 451.0
+text = "Add Infantry"
+
+[node name="Button3" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 511.0
+offset_right = 612.0
+offset_bottom = 606.0
+text = "Annex"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 19.0
+offset_top = 20.0
+offset_right = 309.0
+offset_bottom = 60.0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 19.0
+offset_top = 93.0
+offset_right = 309.0
+offset_bottom = 133.0
+
+[connection signal="pressed" from="TextureRect/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="TextureRect/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="TextureRect/Button3" to="." method="_on_button_3_pressed"]

@@ -34,9 +34,9 @@ text = "add infantry"
 metadata/_edit_use_anchors_ = true
 
 [node name="Button3" type="Button" parent="Sprite2D"]
-offset_left = -315.19052
-offset_right = -211.19052
-offset_bottom = 31.000021
+offset_left = -315.191
+offset_right = -211.191
+offset_bottom = 31.0
 scale = Vector2(2.26, 2.26)
 text = "annex"
 metadata/_edit_use_anchors_ = true

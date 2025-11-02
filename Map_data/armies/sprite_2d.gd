@@ -36,6 +36,26 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 					add_infantry_button.visible = true
 				selected_indicator.visible = true
 				move_button.visible = true
+				Info_bank.name_of_current_army_file = name_of_army_file
+				print(str(Info_bank.menu_is_active) + str(1))
+				var canvas_layer: CanvasLayer = null
+				if Info_bank.menu_is_active == false:
+					# Look for CanvasLayer in the current scene
+					for node in get_tree().get_current_scene().get_children():
+						if node is CanvasLayer:
+							canvas_layer = node
+							var scene_to_instantiate = load("res://Scenes/Army_menu.tscn")
+							Info_bank.new_scene = scene_to_instantiate.instantiate()  # Use global new_scene
+							canvas_layer.add_child(Info_bank.new_scene)
+							Info_bank.new_scene.global_position = Vector2(200, 700)
+							Info_bank.menu_is_active = true
+							print("scene made")
+
+				
+				
+				
+				
+				
 				
 				is_selected = true
 				Info_bank.something_selected = true
@@ -47,10 +67,6 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 				var army_parse = JSON.parse_string(army_text)
 				var army_num = army_parse.get("infantry_num", 0)
 				infantry_num = army_num
-				print(army_text)
-				print(army_parse)
-				print(army_num)
-				print(str(infantry_num) + " infantry")
 		else:
 			if not cur_prov_controller == prov_controller:
 				annex_button.visible = false
