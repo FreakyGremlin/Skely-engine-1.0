@@ -6,11 +6,11 @@
 		"Mangawhai",
 		"Kaiwaka"
 	],
-	"countrie_color": "8d9c57",
+	"countrie_color": "#ffffbe",
 	"has_army": false,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
-	"province_controller": "CLV",
+	"province_controller": "AST",
 	"province_ids": [
 		"Wharehine1"
 	],

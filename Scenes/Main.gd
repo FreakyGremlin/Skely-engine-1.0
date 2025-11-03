@@ -198,3 +198,48 @@ func import_file(filepath):
 	else:
 		print("Failed to open file:", filepath)
 		return null
+
+
+func _on_texture_button_pressed() -> void:
+	var controlled_provs = 0
+	for Node in $Regions.get_children():
+		var dict_res = "res://Map_data/regions.txt"
+		var dict_file = FileAccess.open(dict_res, FileAccess.READ)
+		var dict_text = dict_file.get_as_text()
+		dict_file.close()
+		var dict_parse = JSON.parse_string(dict_text)
+		var prov_name = dict_parse.get(Node.name)
+		print(prov_name)
+		
+		
+		
+		
+		
+		
+		var prov_res = "res://Map_data/Provinces/" + prov_name + ".json"
+		print(prov_res)
+		var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+		var prov_text = prov_file.get_as_text()
+		prov_file.close()
+		var prov_parse = JSON.parse_string(prov_text)
+		var prov_controller = prov_parse.get("province_controller")
+		if prov_controller == Info_bank.ControlledNation:
+			
+			controlled_provs += 1
+			print(controlled_provs)
+		var nat_res = "res://Map_data/nations/" + Info_bank.ControlledNation + ".json"
+		var nat_file = FileAccess.open(nat_res, FileAccess.READ)
+		var nat_text = nat_file.get_as_text()
+		nat_file.close()
+		var nat_parse = JSON.parse_string(nat_text)
+		nat_parse["Controlled_provinces"] = controlled_provs
+		
+		nat_file = FileAccess.open(nat_res, FileAccess.WRITE)
+		var nat_string = JSON.stringify(nat_parse, "\t")
+		nat_file.store_string(nat_string)
+		nat_file.close()
+	
+	
+	Info_bank.player_gold += controlled_provs * 100
+	$CanvasLayer/RichTextLabel2.text = str(Info_bank.player_gold)
+	
