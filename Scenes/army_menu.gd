@@ -41,13 +41,20 @@ func _on_button_2_pressed() -> void:
 
 
 func _on_button_3_pressed() -> void:
+	#ANNEX CODE
 	if infantry_num * 100 > 100:
+		Info_bank.name_of_current_army_file = name_of_army_file
+		var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
+		var army_file = FileAccess.open(army_res,FileAccess.READ)
+		var army_text = army_file.get_as_text()
+		army_file.close()
+		var army_parse = JSON.parse_string(army_text)
+		tile_located_on = army_parse.get("tile_located_on")
 		
 	# Get the hovered province name
 		
 		# Build the path to the province JSON file
 		var prov_res = "res://Map_data/Provinces/" + tile_located_on
-
 		# Open the file in read mode first
 		var prov_file = FileAccess.open(prov_res, FileAccess.READ)
 
@@ -62,32 +69,20 @@ func _on_button_3_pressed() -> void:
 		# Parse JSON
 		var parse_result = JSON.parse_string(json_text)
 
-
-		var prov_stats = parse_result
-
 		# Debug prints
-		print(Info_bank.HoveredNation)
-		print(Info_bank.HoveredNationColour)
-		print(Info_bank.ControlledNation)
-		print(Info_bank.ControlledNationColour)
+
 
 		# Modify the data
-		prov_stats["countrie_color"] = Info_bank.ControlledNationColour
-		prov_stats["province_controller"] = Info_bank.ControlledNation
-
-		print(prov_stats)
-
+		parse_result["countrie_color"] = Info_bank.ControlledNationColour
+		parse_result["province_controller"] = Info_bank.ControlledNation
 		# Now reopen the file in WRITE mode to save the changes
 		prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
-		if prov_file == null:
-			print("Failed to open file for writing:", prov_res)
-			return
-
-		# Write updated JSON to file
-		prov_file.store_string(JSON.stringify(prov_stats, "\t"))  # "\t" = pretty print
+		
+		var prov_string = JSON.stringify(parse_result, "\t")
+		prov_file.store_string(prov_string)  # "\t" = pretty print
 		prov_file.close()
 
-		print("Province JSON updated successfully.")
+
 		Info_bank.region_gd_ref.update_tiles()
 
 		Info_bank.main_menu_is_active = false
@@ -95,18 +90,27 @@ func _on_button_3_pressed() -> void:
 
 func _on_button_pressed() -> void:
 	if is_selected == true:
-		
 		if move_menu_is_open == false:
-			print("menu active")
-
+			$TextureRect/Button.disabled = true
 			move_menu_is_open = true
 		else:
+			$TextureRect/Button.disabled = false
 			move_menu_is_open = false
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("click_left"):
 		
 		if move_menu_is_open == true:
+			var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
+			var army_file = FileAccess.open(army_res, FileAccess.READ)
+			var json_text = army_file.get_as_text()
+			army_file.close()
+			var army_parse_result = JSON.parse_string(json_text)
+			
+			tile_located_on = army_parse_result.get("tile_located_on")
+			
+			# change the json adding
+			
 			var cur_prov_res = "res://Map_data/Provinces/" + tile_located_on
 			var cur_prov_file = FileAccess.open(cur_prov_res, FileAccess.READ)
 			var cur_prov_text = cur_prov_file.get_as_text()
@@ -118,10 +122,6 @@ func _input(event: InputEvent) -> void:
 			for id in cur_border_provs:
 				if Info_bank.HoveredProvinceName == id:
 					can_move_here = true
-					print(id)
-					print(can_move_here)
-					print(cur_border_provs)
-					print(Info_bank.HoveredProvinceName)
 			if can_move_here == true:
 				var scene_root = Info_bank.army_root_ref
 				# Read province data
@@ -138,47 +138,26 @@ func _input(event: InputEvent) -> void:
 				prov_controller = prov_parse.get("province_controller")
 
 				scene_root.position = Vector2(prov_marker[0], prov_marker[1])
-				$RichTextLabel2.text = Info_bank.HoveredProvinceName
-				update_army_file()
+				$RichTextLabel.text = Info_bank.HoveredProvinceName
+				
+				
+
+				army_parse_result["tile_located_on"] = Info_bank.HoveredProvince
+				army_file = FileAccess.open(army_res, FileAccess.WRITE)
+				var army_string = JSON.stringify(army_parse_result, "\t")
+				
+				army_file.store_string(army_string)
+				army_file.close()
+				move_menu_is_open = false
+				
+				
 				can_move_here = false
 				is_selected = false
 				Info_bank.something_selected = false
-				tile_located_on = Info_bank.HoveredProvince
 				Info_bank.selected_tile = Info_bank.HoveredProvince
-				print(tile_located_on + "tile")
 				
 				cur_prov_file = FileAccess.open(cur_prov_res, FileAccess.WRITE)
 				cur_prov_file.store_string(JSON.stringify(cur_prov_parse, "\t"))
 				cur_prov_file.close()
 				
-func update_army_file():
-	var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
-	var army_file = FileAccess.open(army_res, FileAccess.READ)
-	if army_file == null:
-		push_error("Failed to open army file for reading: " + army_res)
-		return
-
-	var json_text = army_file.get_as_text()
-	army_file.close()
-
-# Use static parse method
-	var army_parse_result = JSON.parse_string(json_text)
-	if typeof(army_parse_result) != TYPE_DICTIONARY:
-		push_error("Failed to parse army JSON or data is not a dictionary")
-		return
-
-		# Modify the data
-		army_parse_result["tile_located_on"] = Info_bank.HoveredProvince
-		print("Modified army stats:", army_parse_result)
-
-		# Open for writing
-		army_file = FileAccess.open(army_res, FileAccess.WRITE)
-		if army_file == null:
-			push_error("Failed to open army file for writing: " + army_res)
-			return
-
-		army_file.store_string(JSON.stringify(army_parse_result, "\t"))  # Pretty print
-		army_file.close()
-
-		# Move unit and update UI
-		move_menu_is_open = false
+	

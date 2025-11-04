@@ -5,12 +5,12 @@
 		"Meremere",
 		"Mangatangi"
 	],
-	"countrie_color": "#ffffbe",
+	"countrie_color": "889cff",
 	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
-	"province_controller": "AST",
+	"province_controller": "FRI",
 	"province_ids": [
 		"Ness1"
 	],

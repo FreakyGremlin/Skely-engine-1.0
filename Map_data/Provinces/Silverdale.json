@@ -4,12 +4,12 @@
 		"Tahekeroa",
 		"Warkworth"
 	],
-	"countrie_color": "889cff",
+	"countrie_color": "8d9c57",
 	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
-	"province_controller": "FRI",
+	"province_controller": "CLV",
 	"province_ids": [
 		"Silverdale1"
 	],

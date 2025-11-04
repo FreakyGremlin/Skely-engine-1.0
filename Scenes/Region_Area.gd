@@ -22,12 +22,10 @@ func _on_child_entered_tree(node):
 		var prov_json_data = JSON.parse_string(file_text)
 		
 		if typeof(prov_json_data) == TYPE_DICTIONARY:
-			print(region_name)
 			var prov_controller = prov_json_data.get("province_controller", "Controller not found")
 			var nation_name = prov_controller + ".json"
 			var Nation_info = "res://Map_data/nations/" + nation_name
 			var nation_file = FileAccess.open(Nation_info, FileAccess.READ)
-			print(region_name + "      get as text")
 			var nation_text = nation_file.get_as_text()
 			var parsed_nat_text = JSON.parse_string(nation_text)
 			var nation_color = parsed_nat_text.get("Nation_color", "nation color not found")
@@ -44,28 +42,23 @@ func update_tiles():
 	_recursive_update_tiles(root)
 
 func _recursive_update_tiles(node):
-	var Province_data = Info_bank.selected_tile
-	print(Info_bank.HoveredProvince)
-	var prov_res = "res://Map_data/Provinces/" + Province_data
-	var prov_file := FileAccess.open(prov_res, FileAccess.READ)
-	
-	if prov_file:
-		var file_text := prov_file.get_as_text()
-		prov_file.close()  # Always close the file when done
-
-		var prov_json_data = JSON.parse_string(file_text)
-		
-		if typeof(prov_json_data) == TYPE_DICTIONARY:
-			
-			var prov_ids = prov_json_data.get("province_ids", [])  # Use [] as a fallback instead of string
-			
-
-			if node is Polygon2D:
-				for id in prov_ids:
-					if node.name == id:
-						print("Matched ID:", id)
-						node.color = Color(Info_bank.ControlledNationColour)
-	
+	var army_res = "res://Map_data/armies/" + Info_bank.name_of_current_army_file + ".json"
+	var army_file = FileAccess.open(army_res,FileAccess.READ)
+	var army_text = army_file.get_as_text()
+	army_file.close()
+	var army_parse = JSON.parse_string(army_text)
+	var selected_provs = army_parse.get("tile_located_on")
+	print(selected_provs + " geruieuebgundrgwoengrenrger")
+	var prov_res = "res://Map_data/Provinces/" + selected_provs 
+	var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+	var prov_text = prov_file.get_as_text()
+	prov_file.close()
+	var prov_parse = JSON.parse_string(prov_text)
+	var prov_ids = prov_parse.get("province_ids", [])
+	if is_instance_valid(node) and node is Polygon2D:
+		for id in prov_ids:
+			if node.name == id:
+				node.color = Color(Info_bank.ControlledNationColour)
 	for child in node.get_children():
 		_recursive_update_tiles(child)
 
@@ -74,7 +67,6 @@ func _on_mouse_entered():
 	var Province_data = str(region_name) + ".json" 
 	Info_bank.HoveredProvince = Province_data
 	Info_bank.HoveredProvinceName = region_name
-	print(Info_bank.HoveredProvince)
 	for node in get_children():
 		if node.is_class("Polygon2D"):
 			node.color = Color(1,1,1,1)

@@ -20,12 +20,13 @@ func _ready():
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_released("click_left"):
+		print(Info_bank.something_selected)
+		print(Info_bank.main_menu_is_active)
 		if is_selected == false:
 			
 			if Info_bank.something_selected == false:
 				selected_indicator.visible = true
 				Info_bank.name_of_current_army_file = name_of_army_file
-				print(str(Info_bank.menu_is_active) + str(1))
 				var canvas_layer: CanvasLayer = null
 				if Info_bank.menu_is_active == false:
 					# Look for CanvasLayer in the current scene
@@ -50,8 +51,10 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 				var army_parse = JSON.parse_string(army_text)
 				var army_num = army_parse.get("infantry_num", 0)
 				infantry_num = army_num
-		else:
 			
+		else:
+			Info_bank.new_scene.queue_free()
+			Info_bank.menu_is_active = false
 			is_selected = false
 			
 			Info_bank.army_root_ref = null

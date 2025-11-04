@@ -27,58 +27,64 @@ func _on_button_1_pressed() -> void:
 func _on_button_2_pressed() -> void:
 	# Get the hovered province name
 	var HoveredProvince = Info_bank.selected_prov
+	if HoveredProvince == null or HoveredProvince == "":
+		push_error("No hovered province selected.")
+		return
 
 	# Build the path to the province JSON file
 	var prov_res = "res://Map_data/Provinces/" + HoveredProvince
+	if not FileAccess.file_exists(prov_res):
+		push_error("Province file does not exist: " + prov_res)
+		return
 
-	# Open the file in read mode first
-	var prov_file = FileAccess.open(prov_res, FileAccess.READ)
-
+	# --- READ ---
+	var prov_file := FileAccess.open(prov_res, FileAccess.READ)
 	if prov_file == null:
-		print("Failed to open file for reading:", prov_res)
+		push_error("Failed to open file for reading: " + prov_res)
 		return
 
-	# Read the file content and parse the JSON
-	var json_text = prov_file.get_as_text()
-	prov_file.close()  # Always close files when done
+	var json_text := prov_file.get_as_text()
+	prov_file.close()
 
-	# Parse JSON
-	var json = JSON.new()
-	var parse_result = json.parse(json_text)
-
-	if parse_result != OK:
-		print("Failed to parse JSON:", json.get_error_message())
+	# --- PARSE ---
+	var parse_result = JSON.parse_string(json_text)
+	if typeof(parse_result) != TYPE_DICTIONARY:
+		push_error("Invalid JSON structure in: " + prov_res)
 		return
 
-	var prov_stats = json.data
+	# --- DEBUG PRINTS ---
+	print("Hovered nation:", Info_bank.HoveredNation)
+	print("Hovered nation colour:", Info_bank.HoveredNationColour)
+	print("Controlled nation:", Info_bank.ControlledNation)
+	print("Controlled nation colour:", Info_bank.ControlledNationColour)
 
-	# Debug prints
-	print(Info_bank.HoveredNation)
-	print(Info_bank.HoveredNationColour)
-	print(Info_bank.ControlledNation)
-	print(Info_bank.ControlledNationColour)
+	# --- MODIFY DATA ---
+	parse_result["countrie_color"] = Info_bank.ControlledNationColour
+	parse_result["province_controller"] = Info_bank.ControlledNation
+	print("Updated data:", parse_result)
 
-	# Modify the data
-	prov_stats["countrie_color"] = Info_bank.ControlledNationColour
-	prov_stats["province_controller"] = Info_bank.ControlledNation
-
-	print(prov_stats)
-
-	# Now reopen the file in WRITE mode to save the changes
+	# --- WRITE UPDATED JSON ---
 	prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
 	if prov_file == null:
-		print("Failed to open file for writing:", prov_res)
+		push_error("Failed to open file for writing: " + prov_res)
 		return
 
-	# Write updated JSON to file
-	prov_file.store_string(JSON.stringify(prov_stats, "\t"))  # "\t" = pretty print
+	var prov_string := JSON.stringify(parse_result, "\t")
+	prov_file.store_string(prov_string)
 	prov_file.close()
 
 	print("Province JSON updated successfully.")
-	Info_bank.region_gd_ref.update_tiles()
 
-	Info_bank.main_menu.queue_free()
-	Info_bank.main_menu_is_active = false
+	# --- SAFE TILE UPDATE ---
+	if is_instance_valid(Info_bank.region_gd_ref):
+		print("Updating tiles for:", Info_bank.region_gd_ref.name)
+		Info_bank.region_gd_ref.update_tiles()
+	else:
+		push_warning("region_gd_ref is invalid or already freed, skipping update.")
+
+
+		Info_bank.main_menu.queue_free()
+		Info_bank.main_menu_is_active = false
 
 func _on_button_3_pressed() -> void:
 	print(str(Info_bank.menu_is_active) + str(1))
@@ -118,7 +124,7 @@ func _on_button_4_pressed() -> void:
 		var army_base_data = {
 			"army_tag" : "1",
 			"infantry_num" : 0,
-			"tile_located_on" : Info_bank.selected_prov_name
+			"tile_located_on" : Info_bank.selected_prov_name + ".json"
 			
 		}
 		Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)

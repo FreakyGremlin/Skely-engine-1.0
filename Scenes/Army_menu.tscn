@@ -19,6 +19,7 @@ offset_left = 53.0
 offset_top = 191.0
 offset_right = 612.0
 offset_bottom = 286.0
+toggle_mode = true
 text = "Move"
 
 [node name="Button2" type="Button" parent="TextureRect"]

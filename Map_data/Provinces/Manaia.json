@@ -4,12 +4,12 @@
 		"Pauanui",
 		"Port Charles"
 	],
-	"countrie_color": "2f6d57",
+	"countrie_color": "889cff",
 	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
-	"province_controller": "LIG",
+	"province_controller": "FRI",
 	"province_ids": [
 		"Manaia1"
 	],

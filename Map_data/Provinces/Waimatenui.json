@@ -8,7 +8,7 @@
 		"Waipoua"
 	],
 	"countrie_color": "#ffffbe",
-	"has_army": true,
+	"has_army": false,
 	"name": "Zeeland",
 	"prov_tag": "WMT",
 	"province_controller": "AST",
