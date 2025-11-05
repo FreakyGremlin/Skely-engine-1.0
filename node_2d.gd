@@ -124,7 +124,8 @@ func _on_button_4_pressed() -> void:
 		var army_base_data = {
 			"army_tag" : "1",
 			"infantry_num" : 0,
-			"tile_located_on" : Info_bank.selected_prov_name + ".json"
+			"tile_located_on" : Info_bank.selected_prov_name + ".json",
+			"army_controller" : Info_bank.ControlledNation
 			
 		}
 		Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)

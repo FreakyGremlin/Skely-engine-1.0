@@ -28,3 +28,5 @@ var debug_mode_on = false
 var is_player_active = true
 var player_gold = 0
 var army_menu: Node = null
+var gold_counter_player: Node = null
+var nations_active = 4

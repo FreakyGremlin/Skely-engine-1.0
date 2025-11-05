@@ -6,7 +6,7 @@
 		"Whangaripo"
 	],
 	"countrie_color": "8d9c57",
-	"has_army": false,
+	"has_army": true,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",

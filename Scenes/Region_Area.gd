@@ -48,7 +48,6 @@ func _recursive_update_tiles(node):
 	army_file.close()
 	var army_parse = JSON.parse_string(army_text)
 	var selected_provs = army_parse.get("tile_located_on")
-	print(selected_provs + " geruieuebgundrgwoengrenrger")
 	var prov_res = "res://Map_data/Provinces/" + selected_provs 
 	var prov_file = FileAccess.open(prov_res, FileAccess.READ)
 	var prov_text = prov_file.get_as_text()

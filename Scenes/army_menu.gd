@@ -26,18 +26,20 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	infantry_num = 0
 func _on_button_2_pressed() -> void:
-	var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
-	
-	var army_file = FileAccess.open(army_res, FileAccess.READ)
-	var army_text = army_file.get_as_text()
-	army_file.close()
-	var army_parse = JSON.parse_string(army_text)
-	infantry_num += 1
-	army_parse["infantry_num"] = infantry_num
-	infantry_num_label.text = str(infantry_num * 100)
-	army_file = FileAccess.open(army_res, FileAccess.WRITE)
-	army_file.store_string(JSON.stringify(army_parse, "\t"))
-	army_file.close()
+	if Info_bank.player_gold > 1000:
+		var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
+		Info_bank.player_gold -= 1000
+		var army_file = FileAccess.open(army_res, FileAccess.READ)
+		var army_text = army_file.get_as_text()
+		army_file.close()
+		var army_parse = JSON.parse_string(army_text)
+		infantry_num += 1
+		army_parse["infantry_num"] = infantry_num
+		infantry_num_label.text = str(infantry_num * 100)
+		army_file = FileAccess.open(army_res, FileAccess.WRITE)
+		Info_bank.gold_counter_player.text = str(Info_bank.player_gold)
+		army_file.store_string(JSON.stringify(army_parse, "\t"))
+		army_file.close()
 
 
 func _on_button_3_pressed() -> void:

@@ -26,9 +26,10 @@ var bordered_array_string : Array[String] = []
 
 var new_scene : Node
 @onready var mapImage = $RegionMap
+@onready var turn_button = $CanvasLayer/TextureButton
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	Info_bank.gold_counter_player = $"CanvasLayer/gold counter"
 	load_regions()
 	_pm.add_item("Check Nation", PopupIds.Check_Nation)
 	_pm.add_item("Set Owner Of Province", PopupIds.set_prov_owner)
@@ -201,45 +202,108 @@ func import_file(filepath):
 
 
 func _on_texture_button_pressed() -> void:
-	var controlled_provs = 0
-	for Node in $Regions.get_children():
-		var dict_res = "res://Map_data/regions.txt"
-		var dict_file = FileAccess.open(dict_res, FileAccess.READ)
-		var dict_text = dict_file.get_as_text()
-		dict_file.close()
-		var dict_parse = JSON.parse_string(dict_text)
-		var prov_name = dict_parse.get(Node.name)
-		print(prov_name)
-		
-		
-		
-		
-		
-		
-		var prov_res = "res://Map_data/Provinces/" + prov_name + ".json"
-		print(prov_res)
-		var prov_file = FileAccess.open(prov_res, FileAccess.READ)
-		var prov_text = prov_file.get_as_text()
-		prov_file.close()
-		var prov_parse = JSON.parse_string(prov_text)
-		var prov_controller = prov_parse.get("province_controller")
-		if prov_controller == Info_bank.ControlledNation:
+	if Info_bank.is_player_active == true:
+		var controlled_provs = 0
+		for Node in $Regions.get_children():
+			var dict_res = "res://Map_data/regions.txt"
+			var dict_file = FileAccess.open(dict_res, FileAccess.READ)
+			var dict_text = dict_file.get_as_text()
+			dict_file.close()
+			var dict_parse = JSON.parse_string(dict_text)
+			var prov_name = dict_parse.get(Node.name)
+			print(prov_name)
 			
-			controlled_provs += 1
-			print(controlled_provs)
-		var nat_res = "res://Map_data/nations/" + Info_bank.ControlledNation + ".json"
-		var nat_file = FileAccess.open(nat_res, FileAccess.READ)
-		var nat_text = nat_file.get_as_text()
-		nat_file.close()
-		var nat_parse = JSON.parse_string(nat_text)
-		nat_parse["Controlled_provinces"] = controlled_provs
+			
+			
+			
+			
+			
+			var prov_res = "res://Map_data/Provinces/" + prov_name + ".json"
+			print(prov_res)
+			var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+			var prov_text = prov_file.get_as_text()
+			prov_file.close()
+			var prov_parse = JSON.parse_string(prov_text)
+			var prov_controller = prov_parse.get("province_controller")
+			if prov_controller == Info_bank.ControlledNation:
+				
+				controlled_provs += 1
+				print(controlled_provs)
+			var nat_res = "res://Map_data/nations/" + Info_bank.ControlledNation + ".json"
+			var nat_file = FileAccess.open(nat_res, FileAccess.READ)
+			var nat_text = nat_file.get_as_text()
+			nat_file.close()
+			var nat_parse = JSON.parse_string(nat_text)
+			nat_parse["Controlled_provinces"] = controlled_provs
+			
+			nat_file = FileAccess.open(nat_res, FileAccess.WRITE)
+			var nat_string = JSON.stringify(nat_parse, "\t")
+			nat_file.store_string(nat_string)
+			nat_file.close()
+			
 		
-		nat_file = FileAccess.open(nat_res, FileAccess.WRITE)
-		var nat_string = JSON.stringify(nat_parse, "\t")
-		nat_file.store_string(nat_string)
-		nat_file.close()
+		Info_bank.is_player_active = false
+		Info_bank.player_gold += controlled_provs * 100
+		Info_bank.gold_counter_player.text = str(Info_bank.player_gold)
+		ai_turn()
 	
+func ai_turn():
+	ai_creates_army()
 	
-	Info_bank.player_gold += controlled_provs * 100
-	$CanvasLayer/RichTextLabel2.text = str(Info_bank.player_gold)
-	
+func ai_creates_army():
+	var nations_active_res = "res://Map_data/nations/nations_active.json"
+	var nations_active_file = FileAccess.open(nations_active_res, FileAccess.READ)
+	var nations_active_text = nations_active_file.get_as_text()
+	nations_active_file.close()
+	var nations_active_parse = JSON.parse_string(nations_active_text)
+	var nations_active_array = nations_active_parse.get("nations_active")
+	for id in nations_active_array:
+		if id == Info_bank.ControlledNation:
+			ai_creates_army()
+		else:
+			if Info_bank.nations_active > 0:
+				var nation_res = "res://Map_data/nations/" + id + ".json"
+				var nation_file = FileAccess.open(nation_res,FileAccess.READ)
+				var nation_text = nation_file.get_as_text()
+				nation_file.close()
+				var nation_parse = JSON.parse_string(nation_text)
+				var nation_capital = nation_parse.get("capital_prov")
+				print(nation_res + "monitor")
+				var prov_res = "res://Map_data/Provinces/" + nation_capital + ".json"
+				var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+				print(prov_res + "monitor text ")
+				var prov_text = prov_file.get_as_text()
+				
+				prov_file.close()
+				var prov_parse = JSON.parse_string(prov_text)
+				var tile_has_army = prov_parse.get("has_army")
+				print(tile_has_army)
+				if tile_has_army == false:
+					prov_parse["has_army"] = true
+					var prov_string = JSON.stringify(prov_parse, "\t")
+					print(prov_parse)
+					
+					var canvas_layer: CanvasLayer = null
+					Info_bank.army_num += 1
+					Info_bank.name_of_current_army_file = "army" + str(Info_bank.army_num)
+					var army_base_data = {
+						"army_tag" : "1",
+						"infantry_num" : 0,
+						"tile_located_on" : Info_bank.selected_prov_name + ".json",
+						"army_controller" : Info_bank.ControlledNation
+						
+					}
+					Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)
+					var json_string = JSON.stringify(army_base_data, "\t")
+					var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(Info_bank.army_num) + ".json", FileAccess.WRITE)
+					army_file.store_string(json_string)
+					army_file.close()
+					var scene_to_instantiate = load("res://Map_data/armies/army.tscn")
+					var new_scene = scene_to_instantiate.instantiate()
+					prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
+					prov_file.store_string(prov_string)
+					prov_file.close()
+
+					Info_bank.nations_active -= 1
+					get_tree().get_root().get_child(1).add_child(new_scene)
+	Info_bank.is_player_active = true
