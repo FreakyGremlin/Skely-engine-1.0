@@ -21,6 +21,18 @@ func _enter_tree() -> void:
 func _on_button_1_pressed() -> void:
 	Info_bank.ControlledNation = Info_bank.HoveredNation
 	Info_bank.ControlledNationColour = Info_bank.HoveredNationColour
+	var nat_array_res = "res://Map_data/nations/nations_active.json"
+	var nat_array_file = FileAccess.open(nat_array_res,FileAccess.READ)
+	var nat_array_text = nat_array_file.get_as_text()
+	nat_array_file.close()
+	var nat_array_parse = JSON.parse_string(nat_array_text)
+	var nat_array = nat_array_parse.get("nations_active")
+	nat_array.erase(Info_bank.ControlledNation)
+	nat_array_parse["nations_active"] = nat_array
+	var nat_array_string = JSON.stringify(nat_array_parse, "\t")
+	nat_array_file = FileAccess.open(nat_array_res, FileAccess.WRITE)
+	nat_array_file.store_string(nat_array_string)
+	nat_array_file.close()
 	Info_bank.main_menu.queue_free()
 	Info_bank.main_menu_is_active = false
 

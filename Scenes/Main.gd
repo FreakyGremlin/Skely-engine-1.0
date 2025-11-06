@@ -10,6 +10,7 @@ var prov_stats = {
 "countrie_color": "",
 "province_controller": ""
 }
+var cur_ai = ""
 var selected_army_menu = ""
 var army_num = 1
 var hovered_nation_name = "best"
@@ -248,9 +249,32 @@ func _on_texture_button_pressed() -> void:
 		ai_turn()
 	
 func ai_turn():
-	ai_creates_army()
+	var nations_active_res = "res://Map_data/nations/nations_active.json"
+	var nations_active_file = FileAccess.open(nations_active_res, FileAccess.READ)
+	var nations_active_text = nations_active_file.get_as_text()
+	nations_active_file.close()
+	var nations_active_parse = JSON.parse_string(nations_active_text)
+	var nations_active_array = nations_active_parse.get("nations_active")
+	var controlled_armies_num = 0
+	for id in nations_active_array:
+		if id == Info_bank.ControlledNation:
+			ai_creates_army()
+		else:
+			var nation_res = "res://Map_data/nations/" + id + ".json"
+			var nation_file = FileAccess.open(nation_res,FileAccess.READ)
+			var nation_text = nation_file.get_as_text()
+			nation_file.close()
+			var nation_parse = JSON.parse_string(nation_text)
+			controlled_armies_num = nation_parse.get("controlled_armies")
+			if controlled_armies_num > 0:
+				move_army()
+			else:
+				ai_creates_army()
+		
+
 	
 func ai_creates_army():
+	
 	var nations_active_res = "res://Map_data/nations/nations_active.json"
 	var nations_active_file = FileAccess.open(nations_active_res, FileAccess.READ)
 	var nations_active_text = nations_active_file.get_as_text()
@@ -270,6 +294,7 @@ func ai_creates_army():
 				var nation_capital = nation_parse.get("capital_prov")
 				print(nation_res + "monitor")
 				var prov_res = "res://Map_data/Provinces/" + nation_capital + ".json"
+				Info_bank.cur_ai_make_army = nation_capital
 				var prov_file = FileAccess.open(prov_res, FileAccess.READ)
 				print(prov_res + "monitor text ")
 				var prov_text = prov_file.get_as_text()
@@ -289,8 +314,8 @@ func ai_creates_army():
 					var army_base_data = {
 						"army_tag" : "1",
 						"infantry_num" : 0,
-						"tile_located_on" : Info_bank.selected_prov_name + ".json",
-						"army_controller" : Info_bank.ControlledNation
+						"tile_located_on" : nation_capital + ".json",
+						"army_controller" : id
 						
 					}
 					Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)
@@ -298,7 +323,7 @@ func ai_creates_army():
 					var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(Info_bank.army_num) + ".json", FileAccess.WRITE)
 					army_file.store_string(json_string)
 					army_file.close()
-					var scene_to_instantiate = load("res://Map_data/armies/army.tscn")
+					var scene_to_instantiate = load("res://Map_data/armies/enemy.tscn")
 					var new_scene = scene_to_instantiate.instantiate()
 					prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
 					prov_file.store_string(prov_string)
@@ -307,3 +332,14 @@ func ai_creates_army():
 					Info_bank.nations_active -= 1
 					get_tree().get_root().get_child(1).add_child(new_scene)
 	Info_bank.is_player_active = true
+
+func move_army():
+	var nations_active_res = "res://Map_data/nations/nations_active.json"
+	var nations_active_file = FileAccess.open(nations_active_res, FileAccess.READ)
+	var nations_active_text = nations_active_file.get_as_text()
+	nations_active_file.close()
+	var nations_active_parse = JSON.parse_string(nations_active_text)
+	var nations_active_array = nations_active_parse.get("nations_active")
+	for id in nations_active_array:
+		if id == Info_bank.ControlledNation:
+			ai_creates_army()

@@ -4,7 +4,7 @@
 		"Pauanui"
 	],
 	"countrie_color": "2f6d57",
-	"has_army": true,
+	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",

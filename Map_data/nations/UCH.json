@@ -3,5 +3,6 @@
 	"Nation_tag": "",
 	"Controlled_provinces": 0,
 	"Nation_color": "ff9dbe",
-	"capital_prov" : "Waimatenui"
+	"capital_prov" : "Waimatenui",
+	"controlled_armies" : 0
 }

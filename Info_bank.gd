@@ -30,3 +30,4 @@ var player_gold = 0
 var army_menu: Node = null
 var gold_counter_player: Node = null
 var nations_active = 4
+var cur_ai_make_army = ""

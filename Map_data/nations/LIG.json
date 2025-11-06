@@ -1,7 +1,8 @@
 {
+	"Controlled_provinces": 2,
+	"Nation_color": "2f6d57",
 	"Nation_name": "Liege",
 	"Nation_tag": "",
-	"Controlled_provinces": 0,
-	"Nation_color": "2f6d57",
-	"capital_prov" : "Port Charles"
+	"capital_prov": "Port Charles",
+	"controlled_armies": 0.0
 }

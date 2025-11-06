@@ -1,20 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://yuie6s6nshpl"]
+[gd_scene load_steps=5 format=3 uid="uid://cgp3hxbc41j6k"]
 
-[ext_resource type="Texture2D" uid="uid://dhocq1e5xyi4e" path="res://images/army/unit logo.png" id="1_dk4fx"]
-[ext_resource type="Script" uid="uid://br0tup6hvlsnl" path="res://Map_data/armies/sprite_2d.gd" id="2_3co52"]
-[ext_resource type="Texture2D" uid="uid://y3hnmr0rbd3f" path="res://images/ui items/selected.png" id="3_aa882"]
+[ext_resource type="Texture2D" uid="uid://dhocq1e5xyi4e" path="res://images/army/unit logo.png" id="1_ml5y7"]
+[ext_resource type="Script" uid="uid://dpm3tcdq8c28s" path="res://Map_data/armies/enemy_ai_army.gd" id="2_ml5y7"]
+[ext_resource type="Texture2D" uid="uid://y3hnmr0rbd3f" path="res://images/ui items/selected.png" id="3_vnydd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3co52"]
 size = Vector2(70, 95)
 
-[node name="Node2D" type="Node2D"]
+[node name="ENEMY" type="Node2D"]
 scale = Vector2(0.346111, 0.34602)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
 scale = Vector2(0.77, 0.77)
-texture = ExtResource("1_dk4fx")
-script = ExtResource("2_3co52")
+texture = ExtResource("1_ml5y7")
+script = ExtResource("2_ml5y7")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 
@@ -26,7 +25,7 @@ shape = SubResource("RectangleShape2D_3co52")
 position = Vector2(0, -100.187)
 rotation = 3.14159
 scale = Vector2(2.835, -2.445)
-texture = ExtResource("3_aa882")
+texture = ExtResource("3_vnydd")
 metadata/_edit_group_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]

@@ -3,5 +3,6 @@
 	"Nation_color": "#ffffbe",
 	"Nation_name": "Austrabest",
 	"Nation_tag": "",
-	"capital_prov" : "Waimatenui"
+	"capital_prov" : "Waimatenui",
+	"controlled_armies" : 0
 }
