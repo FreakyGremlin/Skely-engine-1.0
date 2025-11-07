@@ -1,8 +1,11 @@
 {
-	"Controlled_provinces": 7,
+	"Controlled_provinces": 7.0,
 	"Nation_color": "8d9c57",
 	"Nation_name": "Cleve",
 	"Nation_tag": "",
+	"army_names": [
+		"army2"
+	],
 	"capital_prov": "Warkworth",
-	"controlled_armies": 0.0
+	"controlled_armies": 1.0
 }

@@ -16,7 +16,22 @@ var army_base_data = {
 }
 var infantry_num = 0
 func _ready():
-		selected_indicator.visible = false
+	var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
+	var army_file = FileAccess.open(army_res, FileAccess.READ)
+	var army_text = army_file.get_as_text()
+	army_file.close()
+	var army_parse = JSON.parse_string(army_text)
+	var army_controller = army_parse.get("army_controller")
+
+	var nation_res = "res://Map_data/nations/" + army_controller + ".json"
+	var nation_file = FileAccess.open(nation_res,FileAccess.READ)
+	var nation_text = nation_file.get_as_text()
+	nation_file.close()
+	var nation_parse = JSON.parse_string(nation_text)
+	var nation_color = 
+	selected_indicator.visible = false
+	$RichTextLabel3.text = Info_bank.name_of_current_army_file
+	$".".self_modulate = 
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_released("click_left"):
