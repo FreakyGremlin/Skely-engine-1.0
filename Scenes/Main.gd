@@ -27,10 +27,10 @@ var bordered_array_string : Array[String] = []
 
 var new_scene : Node
 @onready var mapImage = $RegionMap
-@onready var turn_button = $CanvasLayer/TextureButton
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Info_bank.gold_counter_player = $"CanvasLayer/gold counter"
+	Info_bank.region_node_ref = $Regions
 	load_regions()
 	_pm.add_item("Check Nation", PopupIds.Check_Nation)
 	_pm.add_item("Set Owner Of Province", PopupIds.set_prov_owner)
@@ -154,7 +154,7 @@ func _process(delta):
 	hovered_nation_name = Info_bank.full_nation_name
 	$PopupMenu.set_item_text(4, hovered_nation_name)
 	pass
-	$CanvasLayer/RichTextLabel.text = str(bordered_array_string)
+
 func load_regions():
 	#loads the map texture and sets the provinces
 	var image = mapImage.get_texture().get_image()
@@ -247,53 +247,7 @@ func import_file(filepath):
 		return null
 
 
-func _on_texture_button_pressed() -> void:
-	print(Info_bank.is_player_active)
-	if Info_bank.is_player_active == true:
-		var controlled_provs = 0
-		for Node in $Regions.get_children():
-			var dict_res = "res://Map_data/regions.txt"
-			var dict_file = FileAccess.open(dict_res, FileAccess.READ)
-			var dict_text = dict_file.get_as_text()
-			dict_file.close()
-			var dict_parse = JSON.parse_string(dict_text)
-			var prov_name = dict_parse.get(Node.name)
-			print(prov_name)
-			
-			
-			
-			
-			
-			
-			var prov_res = "res://Map_data/Provinces/" + prov_name + ".json"
-			print(prov_res)
-			var prov_file = FileAccess.open(prov_res, FileAccess.READ)
-			var prov_text = prov_file.get_as_text()
-			prov_file.close()
-			var prov_parse = JSON.parse_string(prov_text)
-			var prov_controller = prov_parse.get("province_controller")
-			if prov_controller == Info_bank.ControlledNation:
-				
-				controlled_provs += 1
-				print(controlled_provs)
-			var nat_res = "res://Map_data/nations/" + Info_bank.ControlledNation + ".json"
-			var nat_file = FileAccess.open(nat_res, FileAccess.READ)
-			var nat_text = nat_file.get_as_text()
-			nat_file.close()
-			var nat_parse = JSON.parse_string(nat_text)
-			nat_parse["Controlled_provinces"] = controlled_provs
-			
-			nat_file = FileAccess.open(nat_res, FileAccess.WRITE)
-			var nat_string = JSON.stringify(nat_parse, "\t")
-			nat_file.store_string(nat_string)
-			nat_file.close()
-			
-		
-		Info_bank.is_player_active = false
-		Info_bank.player_gold += controlled_provs * 100
-		Info_bank.gold_counter_player.text = str(Info_bank.player_gold)
-		ai_turn()
-	
+
 func ai_turn():
 	var nations_active_res = "res://Map_data/nations/nations_active.json"
 	var nations_active_file = FileAccess.open(nations_active_res, FileAccess.READ)

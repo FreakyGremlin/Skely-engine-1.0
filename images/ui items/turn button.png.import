@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvh4x12okgch2"
-path="res://.godot/imported/province ui.png-a4c0efd2f442dbdc48d035f768dd0be3.ctex"
+uid="uid://cyqgt4j6fo37d"
+path="res://.godot/imported/turn button.png-604db512d98099a6590cda4cfa9ba9b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/province ui images/province ui.png"
-dest_files=["res://.godot/imported/province ui.png-a4c0efd2f442dbdc48d035f768dd0be3.ctex"]
+source_file="res://images/ui items/turn button.png"
+dest_files=["res://.godot/imported/turn button.png-604db512d98099a6590cda4cfa9ba9b5.ctex"]
 
 [params]
 

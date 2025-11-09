@@ -31,3 +31,7 @@ var army_menu: Node = null
 var gold_counter_player: Node = null
 var nations_active = 4
 var cur_ai_make_army = ""
+var region_node_ref : Node = null
+var canvas_ref : Node = null
+var player_revenue = 0
+var players_armies_num = 0

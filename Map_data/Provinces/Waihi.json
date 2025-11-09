@@ -5,7 +5,7 @@
 		"Pauanui"
 	],
 	"countrie_color": "889cff",
-	"has_army": false,
+	"has_army": true,
 	"name": "Zeeland",
 	"prov_tag": "WAH",
 	"province_controller": "FRI",

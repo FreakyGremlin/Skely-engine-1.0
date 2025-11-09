@@ -5,7 +5,7 @@
 		"Mangatarata"
 	],
 	"countrie_color": "889cff",
-	"has_army": false,
+	"has_army": true,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "MAN",

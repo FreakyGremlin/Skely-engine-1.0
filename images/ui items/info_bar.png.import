@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvh4x12okgch2"
-path="res://.godot/imported/province ui.png-a4c0efd2f442dbdc48d035f768dd0be3.ctex"
+uid="uid://b7rbd25ipsuge"
+path="res://.godot/imported/info_bar.png-27f5535043a5752fdd11b45f93d9b78c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/province ui images/province ui.png"
-dest_files=["res://.godot/imported/province ui.png-a4c0efd2f442dbdc48d035f768dd0be3.ctex"]
+source_file="res://images/ui items/info_bar.png"
+dest_files=["res://.godot/imported/info_bar.png-27f5535043a5752fdd11b45f93d9b78c.ctex"]
 
 [params]
 

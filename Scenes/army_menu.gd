@@ -8,9 +8,22 @@ var move_menu_is_open = false
 var cur_prov_controller = ""
 var prov_controller = ""
 var can_move_here = false
+@onready var move_army = $TextureRect/Button
+@onready var add_infantry = $TextureRect/Button2
+@onready var annex_tile = $TextureRect/Button3
+
+func _process(delta: float) -> void:
+	if Info_bank.player_gold > 999:
+		add_infantry.disabled = false
+	else:
+		add_infantry.disabled = true
 
 
 func _enter_tree() -> void:
+	
+	var infantry_label = $RichTextLabel2
+	var location_tile = $RichTextLabel
+	
 	tile_located_on = Info_bank.selected_prov
 	name_of_army_file = Info_bank.name_of_current_army_file
 	var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
@@ -21,10 +34,13 @@ func _enter_tree() -> void:
 	var army_parse = JSON.parse_string(army_text)
 	var army_num = army_parse.get("infantry_num", 0)
 	infantry_num = army_num
-	$RichTextLabel2.text = str(infantry_num * 100)
+	infantry_label.text = str(infantry_num * 100)
+	location_tile.text = Info_bank.HoveredProvinceName
+	
 
 func _exit_tree() -> void:
 	infantry_num = 0
+
 func _on_button_2_pressed() -> void:
 	if Info_bank.player_gold > 1000:
 		var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
@@ -40,7 +56,6 @@ func _on_button_2_pressed() -> void:
 		Info_bank.gold_counter_player.text = str(Info_bank.player_gold)
 		army_file.store_string(JSON.stringify(army_parse, "\t"))
 		army_file.close()
-
 
 func _on_button_3_pressed() -> void:
 	#ANNEX CODE
@@ -93,10 +108,10 @@ func _on_button_3_pressed() -> void:
 func _on_button_pressed() -> void:
 	if is_selected == true:
 		if move_menu_is_open == false:
-			$TextureRect/Button.disabled = true
+			move_army.disabled = true
 			move_menu_is_open = true
 		else:
-			$TextureRect/Button.disabled = false
+			move_army.disabled = false
 			move_menu_is_open = false
 
 func _input(event: InputEvent) -> void:
@@ -122,7 +137,15 @@ func _input(event: InputEvent) -> void:
 			cur_prov_controller = cur_prov_parse.get("province_controller")
 			cur_prov_parse["has_army"] = false
 			for id in cur_border_provs:
-				if Info_bank.HoveredProvinceName == id:
+				var prov_res = "res://Map_data/Provinces/" + id + ".json"
+				var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+				var prov_text = prov_file.get_as_text()
+				prov_file.close()
+
+				var prov_parse = JSON.parse_string(prov_text)
+				var tile_is_occupied = prov_parse.get("has_army")
+				
+				if Info_bank.HoveredProvinceName == id and tile_is_occupied == false:
 					can_move_here = true
 			if can_move_here == true:
 				var scene_root = Info_bank.army_root_ref

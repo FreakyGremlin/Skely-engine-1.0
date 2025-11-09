@@ -29,17 +29,13 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 				Info_bank.name_of_current_army_file = name_of_army_file
 				var canvas_layer: CanvasLayer = null
 				if Info_bank.menu_is_active == false:
-					# Look for CanvasLayer in the current scene
-					for node in get_tree().get_current_scene().get_children():
-						if node is CanvasLayer:
-							canvas_layer = node
-							var scene_to_instantiate = load("res://Scenes/Army_menu.tscn")
-							Info_bank.new_scene = scene_to_instantiate.instantiate()  # Use global new_scene
-							canvas_layer.add_child(Info_bank.new_scene)
-							Info_bank.new_scene.global_position = Vector2(200, 700)
-							Info_bank.menu_is_active = true
-							Info_bank.army_menu = Info_bank.new_scene
-							print("scene made")
+					var scene_to_instantiate = load("res://Scenes/Army_menu.tscn")
+					Info_bank.new_scene = scene_to_instantiate.instantiate()  # Use global new_scene
+					Info_bank.canvas_ref.add_child(Info_bank.new_scene)
+					Info_bank.new_scene.global_position = Vector2(200, 700)
+					Info_bank.menu_is_active = true
+					Info_bank.army_menu = Info_bank.new_scene
+					print("scene made")
 				is_selected = true
 				Info_bank.army_root_ref = $".."
 				Info_bank.something_selected = true

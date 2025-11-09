@@ -28,10 +28,10 @@ func _ready():
 	var nation_text = nation_file.get_as_text()
 	nation_file.close()
 	var nation_parse = JSON.parse_string(nation_text)
-	var nation_color = 
+	var nation_color = nation_parse.get("Nation_color")
 	selected_indicator.visible = false
 	$RichTextLabel3.text = Info_bank.name_of_current_army_file
-	$".".self_modulate = 
+	$".".self_modulate = nation_color
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_released("click_left"):
