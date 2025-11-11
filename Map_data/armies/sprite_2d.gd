@@ -17,7 +17,11 @@ var army_base_data = {
 var infantry_num = 0
 func _ready():
 		selected_indicator.visible = false
-
+func deselected():
+	is_selected = false
+	selected_indicator.visible = false
+	Info_bank.something_selected = false
+	Info_bank.menu_is_active = false
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_released("click_left"):
 		print(Info_bank.something_selected)

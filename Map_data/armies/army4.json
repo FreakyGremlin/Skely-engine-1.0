@@ -1,7 +1,6 @@
 {
-	"army_controller": "LIG",
+	"army_controller": "CLV",
 	"army_tag": "1",
-	"infantry_num": 0,
-	"move_points": 1,
-	"tile_located_on": "Waihi.json"
+	"infantry_num": 0.0,
+	"tile_located_on": "Tahekeroa.json"
 }

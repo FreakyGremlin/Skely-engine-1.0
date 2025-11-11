@@ -217,8 +217,6 @@ func _input(event: InputEvent) -> void:
 					cur_prov_file.store_string(JSON.stringify(cur_prov_parse, "\t"))
 					cur_prov_file.close()
 		
-		if attack_menu_is_open == true:
-			Info_bank.enemy_root_ref.queue_free()
 		
 
 
@@ -235,9 +233,10 @@ func _on_button_4_pressed() -> void:
 			Info_bank.attack_mode_active = false
 
 func armies_to_attack():
-	var main_node = $"."
+	var main_node = Info_bank.main_scene_ref
 	for id in Info_bank.armies_active_names:
 		for Node in main_node.get_children():
+			print(Node.name + "nodename")
 			if Node.name == id:
 				print("node modulated")
 				Node.modulate = Color()

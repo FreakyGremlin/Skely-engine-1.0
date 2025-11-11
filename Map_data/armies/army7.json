@@ -1,6 +1,6 @@
 {
-	"army_controller": "FRI",
+	"army_controller": "AST",
 	"army_tag": "1",
-	"infantry_num": 0,
-	"tile_located_on": "Meremere.json"
+	"infantry_num": 0.0,
+	"tile_located_on": "Ararua.json"
 }

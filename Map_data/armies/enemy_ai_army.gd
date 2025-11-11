@@ -34,6 +34,47 @@ func _ready():
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_released("click_left"):
 		Info_bank.enemy_root_ref = self
+		
+		var player_army_loc = Info_bank.selected_thing.tile_located_on
+		var ai_army_loc = tile_located_on
+		Info_bank.text_file("res://Map_data/armies/" + player_army_loc, "")
+		var parse = JSON.parse_string(Info_bank.text)
+		var border_array = parse.get("bordered_provs")
+		var can_attack = false
+		for id in border_array:
+			if id + ".json" == player_army_loc:
+				can_attack = true
+		if can_attack == true:
+			if Info_bank.attack_mode_active == true:
+				
+				var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
+				var army_file = FileAccess.open(army_res, FileAccess.READ)
+				var json_text = army_file.get_as_text()
+				army_file.close()
+				var army_parse_result = JSON.parse_string(json_text)
+				var army_controller = army_parse_result.get("army_controller")
+				var file_text = ""
+				Info_bank.text_file("res://Map_data/Provinces/" + tile_located_on, file_text)
+				var file_parse = JSON.parse_string(Info_bank.text)
+				Info_bank.change_file("res://Map_data/Provinces/" + tile_located_on,file_parse,"has_army",false)
+				
+				
+				
+				var nat_res = "res://Map_data/nations/" + army_controller + ".json"
+				var nat_file = FileAccess.open(nat_res, FileAccess.READ)
+				var nat_text = nat_file.get_as_text()
+				nat_file.close()
+				var nat_parse = JSON.parse_string(nat_text)
+				nat_parse["controlled_armies"] -= 1
+				
+				var nat_string = JSON.stringify(nat_parse, "\t")
+				nat_file = FileAccess.open(nat_res, FileAccess.WRITE)
+				nat_file.store_string(nat_string)
+				nat_file.close()
+				self.queue_free()
+				Info_bank.attack_mode_active = false
+				Info_bank.selected_thing.deselected()
+				Info_bank.new_scene.queue_free()
 func loaded_in():
 	var scene_root = $".."
 	is_selected = false

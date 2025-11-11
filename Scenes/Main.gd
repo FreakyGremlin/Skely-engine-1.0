@@ -42,7 +42,7 @@ func _ready():
 	_pm.connect("index_pressed", Callable (self,"_on_PopupMenu_index_pressed"))
 	$PopupMenu.set_item_disabled(4, true)
 	
-	
+	Info_bank.main_scene_ref = $"."
 	
 	var nations_active_res = "res://Map_data/nations/nations_active.json"
 	var nations_active_file = FileAccess.open(nations_active_res, FileAccess.READ)
@@ -179,7 +179,10 @@ func load_regions():
 		
 		var prov_file = FileAccess.open(prov_res, FileAccess.READ)
 		if prov_file:
+			print(prov_res)
+			
 			var prov_text = prov_file.get_as_text()
+			print(prov_text)
 			prov_file.close()
 			var prov_parse = JSON.parse_string(prov_text)
 			prov_parse["has_army"] = false
@@ -284,68 +287,64 @@ func ai_creates_army():
 	nations_active_file.close()
 	var nations_active_parse = JSON.parse_string(nations_active_text)
 	var nations_active_array = nations_active_parse.get("nations_active")
-
-	if Info_bank.nations_active > 0:
-		var nation_res = "res://Map_data/nations/" + cur_ai + ".json"
-		var nation_file = FileAccess.open(nation_res,FileAccess.READ)
-		var nation_text = nation_file.get_as_text()
-		nation_file.close()
-		var nation_parse = JSON.parse_string(nation_text)
-		nation_parse["controlled_armies"] += 1
-		var army_name_array = nation_parse.get("army_names")
-		var nation_capital = nation_parse.get("capital_prov")
-		print(nation_res + "monitor")
-		var prov_res = "res://Map_data/Provinces/" + nation_capital + ".json"
-		Info_bank.cur_ai_make_army = nation_capital
-		var prov_file = FileAccess.open(prov_res, FileAccess.READ)
-		print(prov_res + "monitor text ")
-		var prov_text = prov_file.get_as_text()
+	var nation_res = "res://Map_data/nations/" + cur_ai + ".json"
+	var nation_file = FileAccess.open(nation_res,FileAccess.READ)
+	var nation_text = nation_file.get_as_text()
+	nation_file.close()
+	var nation_parse = JSON.parse_string(nation_text)
+	nation_parse["controlled_armies"] += 1
+	var army_name_array = nation_parse.get("army_names")
+	var nation_capital = nation_parse.get("capital_prov")
+	print(nation_res + "monitor")
+	var prov_res = "res://Map_data/Provinces/" + nation_capital + ".json"
+	Info_bank.cur_ai_make_army = nation_capital
+	var prov_file = FileAccess.open(prov_res, FileAccess.READ)
+	print(prov_res + "monitor text ")
+	var prov_text = prov_file.get_as_text()
+	
+	prov_file.close()
+	var prov_parse = JSON.parse_string(prov_text)
+	var tile_has_army = prov_parse.get("has_army")
+	print(str(tile_has_army) + "tilehasarmy" )
+	if tile_has_army == false:
+		prov_parse["has_army"] = true
+		var prov_string = JSON.stringify(prov_parse, "\t")
+		print(prov_parse)
 		
+		var canvas_layer: CanvasLayer = null
+		Info_bank.army_num += 1
+		Info_bank.name_of_current_army_file = "army" + str(Info_bank.army_num)
+		var army_base_data = {
+			"army_tag" : "1",
+			"infantry_num" : 0,
+			"tile_located_on" : nation_capital + ".json",
+			"army_controller" : cur_ai
+			
+		}
+		army_name_array.append(Info_bank.name_of_current_army_file)
+		var nat_string = JSON.stringify(nation_parse, "\t")
+		nation_file = FileAccess.open(nation_res, FileAccess.WRITE)
+		nation_file.store_string(nat_string)
+		nation_file.close()
+		
+		
+		
+		Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)
+		var json_string = JSON.stringify(army_base_data, "\t")
+		var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(Info_bank.army_num) + ".json", FileAccess.WRITE)
+		army_file.store_string(json_string)
+		army_file.close()
+		var scene_to_instantiate = load("res://Map_data/armies/enemy.tscn")
+		var new_scene = scene_to_instantiate.instantiate()
+		
+		new_scene.name = "ai_unit" + cur_ai
+		Info_bank.armies_active_names.append(new_scene.name)
+		print(Info_bank.armies_active_names)
+		
+		prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
+		prov_file.store_string(prov_string)
 		prov_file.close()
-		var prov_parse = JSON.parse_string(prov_text)
-		var tile_has_army = prov_parse.get("has_army")
-		print(tile_has_army)
-		if tile_has_army == false:
-			prov_parse["has_army"] = true
-			var prov_string = JSON.stringify(prov_parse, "\t")
-			print(prov_parse)
-			
-			var canvas_layer: CanvasLayer = null
-			Info_bank.army_num += 1
-			Info_bank.name_of_current_army_file = "army" + str(Info_bank.army_num)
-			var army_base_data = {
-				"army_tag" : "1",
-				"infantry_num" : 0,
-				"tile_located_on" : nation_capital + ".json",
-				"army_controller" : cur_ai
-				
-			}
-			army_name_array.append(Info_bank.name_of_current_army_file)
-			var nat_string = JSON.stringify(nation_parse, "\t")
-			nation_file = FileAccess.open(nation_res, FileAccess.WRITE)
-			nation_file.store_string(nat_string)
-			nation_file.close()
-			
-			
-			
-			Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)
-			var json_string = JSON.stringify(army_base_data, "\t")
-			var army_file = FileAccess.open("res://Map_data/armies/" + "army" + str(Info_bank.army_num) + ".json", FileAccess.WRITE)
-			army_file.store_string(json_string)
-			army_file.close()
-			var scene_to_instantiate = load("res://Map_data/armies/enemy.tscn")
-			var new_scene = scene_to_instantiate.instantiate()
-			
-			new_scene.name = "ai_unit" + cur_ai
-			Info_bank.armies_active_names.append(new_scene.name)
-			print(Info_bank.armies_active_names)
-			
-			prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
-			prov_file.store_string(prov_string)
-			prov_file.close()
-
-			Info_bank.nations_active -= 1
-			get_tree().get_root().get_child(1).add_child(new_scene)
+		get_tree().get_root().get_child(1).add_child(new_scene)
 	Info_bank.is_player_active = true
 
 func move_army():

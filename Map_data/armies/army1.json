@@ -1,6 +1,7 @@
 {
-	"army_controller": "AST",
+	"army_controller": "LIG",
 	"army_tag": "1",
-	"infantry_num": 0,
-	"tile_located_on": "Waimatenui.json"
+	"infantry_num": 0.0,
+	"move_points": 0.0,
+	"tile_located_on": "Mangatangi.json"
 }

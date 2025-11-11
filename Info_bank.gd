@@ -38,3 +38,32 @@ var players_armies_num = 0
 var enemy_root_ref : Node = null
 var attack_mode_active = false
 var armies_active_names = []
+var main_scene_ref : Node = null
+
+
+
+
+
+
+
+
+#funcs
+var text = ""
+func text_file(Res,text):
+	var file_res = Res
+	var file = FileAccess.open(Res, FileAccess.READ)
+	var file_text = file.get_as_text()
+	text = file_text
+	file.close()
+	Info_bank.text = file_text
+	print(text + "text")
+	return text
+
+func change_file(res,parse,subject,edit):
+	print(str(parse) + "parsed")
+	var file = FileAccess.open(res,FileAccess.WRITE)
+	parse[subject] = edit
+	var string = JSON.stringify(parse, "\t")
+	file.store_string(string)
+	file.close()
+	
