@@ -6,7 +6,7 @@
 		"Mangatangi"
 	],
 	"countrie_color": "889cff",
-	"has_army": true,
+	"has_army": false,
 	"name": "Zeeland",
 	"prov_tag": "MER",
 	"province_controller": "FRI",

@@ -4,11 +4,11 @@
 		"Thames",
 		"Pauanui"
 	],
-	"countrie_color": "889cff",
+	"countrie_color": "2f6d57",
 	"has_army": true,
 	"name": "Zeeland",
 	"prov_tag": "WAH",
-	"province_controller": "FRI",
+	"province_controller": "LIG",
 	"province_ids": [
 		"Waihi1"
 	],

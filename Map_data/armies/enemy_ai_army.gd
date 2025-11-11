@@ -1,7 +1,6 @@
 extends Sprite2D
 var is_selected = false
 var move_menu_is_open = false
-@onready var selected_indicator = $Sprite2D2
 var cur_prov_controller = ""
 var prov_controller = ""
 var name_of_army_file = ""
@@ -29,52 +28,12 @@ func _ready():
 	nation_file.close()
 	var nation_parse = JSON.parse_string(nation_text)
 	var nation_color = nation_parse.get("Nation_color")
-	selected_indicator.visible = false
 	$RichTextLabel3.text = Info_bank.name_of_current_army_file
 	$".".self_modulate = nation_color
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_released("click_left"):
-		print(Info_bank.something_selected)
-		print(Info_bank.main_menu_is_active)
-		if is_selected == false:
-			
-			if Info_bank.something_selected == false:
-				selected_indicator.visible = true
-				Info_bank.name_of_current_army_file = name_of_army_file
-				var canvas_layer: CanvasLayer = null
-				if Info_bank.menu_is_active == false:
-					# Look for CanvasLayer in the current scene
-					for node in get_tree().get_current_scene().get_children():
-						if node is CanvasLayer:
-							canvas_layer = node
-							var scene_to_instantiate = load("res://Scenes/Army_menu.tscn")
-							Info_bank.new_scene = scene_to_instantiate.instantiate()  # Use global new_scene
-							canvas_layer.add_child(Info_bank.new_scene)
-							Info_bank.new_scene.global_position = Vector2(200, 700)
-							Info_bank.menu_is_active = true
-							Info_bank.army_menu = Info_bank.new_scene
-							print("scene made")
-				is_selected = true
-				Info_bank.army_root_ref = $".."
-				Info_bank.something_selected = true
-				Info_bank.selected_thing = self
-				var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
-				var army_file = FileAccess.open(army_res, FileAccess.READ)
-				var army_text = army_file.get_as_text()
-				army_file.close()
-				var army_parse = JSON.parse_string(army_text)
-				var army_num = army_parse.get("infantry_num", 0)
-				infantry_num = army_num
-			
-		else:
-			Info_bank.new_scene.queue_free()
-			Info_bank.menu_is_active = false
-			is_selected = false
-			
-			Info_bank.army_root_ref = null
-			selected_indicator.visible = false
-			Info_bank.something_selected = false
+		Info_bank.enemy_root_ref = self
 func loaded_in():
 	var scene_root = $".."
 	is_selected = false
@@ -137,52 +96,3 @@ func update_army_file():
 
 	# Move unit and update UI
 	move_menu_is_open = false
-
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_released("click_left"):
-		
-		if move_menu_is_open == true:
-			var cur_prov_res = "res://Map_data/Provinces/" + tile_located_on
-			var cur_prov_file = FileAccess.open(cur_prov_res, FileAccess.READ)
-			var cur_prov_text = cur_prov_file.get_as_text()
-			cur_prov_file.close()
-			var cur_prov_parse = JSON.parse_string(cur_prov_text)
-			var cur_border_provs = cur_prov_parse.get("bordered_provs")
-			cur_prov_controller = cur_prov_parse.get("province_controller")
-			cur_prov_parse["has_army"] = false
-			for id in cur_border_provs:
-				if Info_bank.HoveredProvinceName == id:
-					can_move_here = true
-					print(id)
-					print(can_move_here)
-					print(cur_border_provs)
-					print(Info_bank.HoveredProvinceName)
-			if can_move_here == true:
-				var scene_root = $".."
-				# Read province data
-				var prov_res = "res://Map_data/Provinces/" + Info_bank.HoveredProvince
-				var prov_file = FileAccess.open(prov_res, FileAccess.READ)
-				if prov_file == null:
-					push_error("Failed to open province file: " + prov_res)
-					return
-				var prov_text = prov_file.get_as_text()
-				prov_file.close()
-
-				var prov_parse = JSON.parse_string(prov_text)
-				var prov_marker = prov_parse.get("unit_marker")
-				prov_controller = prov_parse.get("province_controller")
-
-				scene_root.position = Vector2(prov_marker[0], prov_marker[1])
-				$RichTextLabel2.text = Info_bank.HoveredProvinceName
-				update_army_file()
-				can_move_here = false
-				is_selected = false
-				selected_indicator.visible = false
-				Info_bank.something_selected = false
-				tile_located_on = Info_bank.HoveredProvince
-				Info_bank.selected_tile = Info_bank.HoveredProvince
-				print(tile_located_on + "tile")
-				
-				cur_prov_file = FileAccess.open(cur_prov_res, FileAccess.WRITE)
-				cur_prov_file.store_string(JSON.stringify(cur_prov_parse, "\t"))
-				cur_prov_file.close()

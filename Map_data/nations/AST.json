@@ -1,1 +1,11 @@
-{"Controlled_provinces":10.0,"Nation_color":"#ffffbe","Nation_name":"Austrabest","Nation_tag":"","army_names":[],"capital_prov":"Waimatenui","controlled_armies":0}
+{
+	"Controlled_provinces": 10.0,
+	"Nation_color": "#ffffbe",
+	"Nation_name": "Austrabest",
+	"Nation_tag": "",
+	"army_names": [
+		"army1"
+	],
+	"capital_prov": "Waimatenui",
+	"controlled_armies": 1.0
+}

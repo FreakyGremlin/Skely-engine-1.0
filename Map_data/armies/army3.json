@@ -1,6 +1,6 @@
 {
-	"army_controller": "LIG",
+	"army_controller": "CLV",
 	"army_tag": "1",
-	"infantry_num": 0.0,
-	"tile_located_on": "Pauanui.json"
+	"infantry_num": 0,
+	"tile_located_on": "Warkworth.json"
 }

@@ -35,3 +35,6 @@ var region_node_ref : Node = null
 var canvas_ref : Node = null
 var player_revenue = 0
 var players_armies_num = 0
+var enemy_root_ref : Node = null
+var attack_mode_active = false
+var armies_active_names = []

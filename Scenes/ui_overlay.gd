@@ -47,6 +47,20 @@ func _on_texture_button_pressed() -> void:
 			nat_file.store_string(nat_string)
 			nat_file.close()
 			
+		for int in Info_bank.players_armies_num + 1:
+			if int > 0:
+				var army_res = "res://Map_data/armies/" + "army" + str(int) + ".json"
+				print(army_res)
+				var army_file = FileAccess.open(army_res,FileAccess.READ)
+				var army_text = army_file.get_as_text()
+				army_file.close()
+				var army_parse = JSON.parse_string(army_text)
+				army_parse["move_points"] = 1
+				var army_string = JSON.stringify(army_parse, "\t")
+				print(army_string + "armyfile")
+				army_file = FileAccess.open(army_res, FileAccess.WRITE)
+				army_file.store_string(army_string)
+				army_file.close()
 		Info_bank.player_revenue = (controlled_provs * 100)-(Info_bank.players_armies_num * 100)
 		
 		

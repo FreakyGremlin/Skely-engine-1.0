@@ -137,8 +137,8 @@ func _on_button_4_pressed() -> void:
 			"army_tag" : "1",
 			"infantry_num" : 0,
 			"tile_located_on" : Info_bank.selected_prov_name + ".json",
-			"army_controller" : Info_bank.ControlledNation
-			
+			"army_controller" : Info_bank.ControlledNation,
+			"move_points" : 1
 		}
 		Info_bank.name_of_army_file = "army" + str(Info_bank.army_num)
 		var json_string = JSON.stringify(army_base_data, "\t")

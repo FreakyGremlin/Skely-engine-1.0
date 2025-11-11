@@ -269,6 +269,7 @@ func ai_turn():
 			controlled_armies_num = nation_parse.get("controlled_armies")
 			if controlled_armies_num > 0:
 				move_army()
+				
 			else:
 				ai_creates_army()
 				
@@ -336,6 +337,9 @@ func ai_creates_army():
 			var new_scene = scene_to_instantiate.instantiate()
 			
 			new_scene.name = "ai_unit" + cur_ai
+			Info_bank.armies_active_names.append(new_scene.name)
+			print(Info_bank.armies_active_names)
+			
 			prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
 			prov_file.store_string(prov_string)
 			prov_file.close()
@@ -367,7 +371,7 @@ func move_army():
 		army_file.close()
 		var army_parse = JSON.parse_string(army_text)
 		var army_location = army_parse.get("tile_located_on")
-		
+		var army_controller = army_parse.get("army_controller")
 		
 		var tile_res = "res://Map_data/Provinces/" + army_location
 		var tile_file = FileAccess.open(tile_res, FileAccess.READ)
@@ -384,15 +388,18 @@ func move_army():
 		tile_file.close()
 		var prov_parse = JSON.parse_string(prov_text)
 		var prov_marker = prov_parse.get("unit_marker")
-		
-		scene_root.position = Vector2(prov_marker[0], prov_marker[1])
-		
-		army_parse["tile_located_on"] = tile_moving_to + ".json"
-		
-		var army_string = JSON.stringify(army_parse, "\t")
-		army_file = FileAccess.open(army_res, FileAccess.WRITE)
-		army_file.store_string(army_string)
-		army_file.close()
-		
-		
+		var prov_tile_controller = prov_parse.get("province_controller")
+		if prov_tile_controller != army_controller:
+			pass
+		else:
+			scene_root.position = Vector2(prov_marker[0], prov_marker[1])
+			
+			army_parse["tile_located_on"] = tile_moving_to + ".json"
+			
+			var army_string = JSON.stringify(army_parse, "\t")
+			army_file = FileAccess.open(army_res, FileAccess.WRITE)
+			army_file.store_string(army_string)
+			army_file.close()
+			
+			
 	Info_bank.is_player_active = true

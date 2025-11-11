@@ -1,5 +1,6 @@
 {
 	"countrie_color": "8d9c57",
+	"move_points": 2.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "CLV",

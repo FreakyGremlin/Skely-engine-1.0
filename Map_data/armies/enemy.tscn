@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgp3hxbc41j6k"]
+[gd_scene load_steps=4 format=3 uid="uid://cgp3hxbc41j6k"]
 
 [ext_resource type="Texture2D" uid="uid://dhocq1e5xyi4e" path="res://images/army/unit logo.png" id="1_ml5y7"]
 [ext_resource type="Script" uid="uid://dpm3tcdq8c28s" path="res://Map_data/armies/enemy_ai_army.gd" id="2_ml5y7"]
-[ext_resource type="Texture2D" uid="uid://y3hnmr0rbd3f" path="res://images/ui items/selected.png" id="3_vnydd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3co52"]
 size = Vector2(70, 95)
@@ -21,13 +20,6 @@ script = ExtResource("2_ml5y7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_3co52")
-
-[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(0, -100.187)
-rotation = 3.14159
-scale = Vector2(2.835, -2.445)
-texture = ExtResource("3_vnydd")
-metadata/_edit_group_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
 offset_left = 86.0
@@ -55,4 +47,3 @@ theme_override_font_sizes/normal_font_size = 221
 
 [connection signal="child_entered_tree" from="." to="Sprite2D" method="_on_node_2d_child_entered_tree"]
 [connection signal="input_event" from="Sprite2D/Area2D" to="Sprite2D" method="_on_area_2d_input_event"]
-[connection signal="child_entered_tree" from="Sprite2D/Sprite2D2" to="Sprite2D" method="_on_sprite_2d_2_child_entered_tree"]
