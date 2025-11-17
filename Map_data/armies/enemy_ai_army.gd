@@ -7,6 +7,8 @@ var name_of_army_file = ""
 var tile_located_on = ""
 var nation_located_on = ""
 var can_move_here = false
+var army_size_label: Node = null
+
 var army_base_data = {
 	"army_tag" : "1",
 	"infantry_num" : 0,
@@ -15,6 +17,11 @@ var army_base_data = {
 }
 var infantry_num = 0
 func _ready():
+	$".".name = "gd_holder"
+	var army_gd_ref = get_path()
+	Info_bank.army_gd_refs.append(army_gd_ref)
+	print(str(Info_bank.army_gd_refs) + "132")
+	army_size_label = $RichTextLabel
 	var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
 	var army_file = FileAccess.open(army_res, FileAccess.READ)
 	var army_text = army_file.get_as_text()
@@ -31,18 +38,29 @@ func _ready():
 	$RichTextLabel3.text = Info_bank.name_of_current_army_file
 	$".".self_modulate = nation_color
 
+func _process(delta: float = 1-2) -> void:
+	update_ui()
+
+
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if Input.is_action_just_released("click_left"):
 		Info_bank.enemy_root_ref = self
+		var player_army_name = Info_bank.selected_thing.name_of_army_file
+		Info_bank.text_file("res://Map_data/armies/" + player_army_name + ".json", "")
 		
-		var player_army_loc = Info_bank.selected_thing.tile_located_on
-		var ai_army_loc = tile_located_on
-		Info_bank.text_file("res://Map_data/armies/" + player_army_loc, "")
+		var player_army_parse = JSON.parse_string(Info_bank.text)
+		var player_army_loc = player_army_parse.get("tile_located_on")
+		
+		Info_bank.text_file("res://Map_data/armies/" + name_of_army_file + ".json", "")
+		var ai_army_parse = JSON.parse_string(Info_bank.text)
+		
+		var ai_army_loc = ai_army_parse.get("tile_located_on")
+		Info_bank.text_file("res://Map_data/Provinces/" + player_army_loc, "")
 		var parse = JSON.parse_string(Info_bank.text)
 		var border_array = parse.get("bordered_provs")
 		var can_attack = false
 		for id in border_array:
-			if id + ".json" == player_army_loc:
+			if id + ".json" == ai_army_loc:
 				can_attack = true
 		if can_attack == true:
 			if Info_bank.attack_mode_active == true:
@@ -137,3 +155,11 @@ func update_army_file():
 
 	# Move unit and update UI
 	move_menu_is_open = false
+
+func update_ui():
+
+	Info_bank.text_file("res://Map_data/armies/" + name_of_army_file + ".json", "")
+	var army_parse = JSON.parse_string(Info_bank.text)
+	var army_size = army_parse.get("infantry_num")
+
+	$RichTextLabel.text = str(army_size)

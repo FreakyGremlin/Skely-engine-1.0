@@ -150,6 +150,7 @@ func _on_button_4_pressed() -> void:
 		prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
 		prov_file.store_string(prov_string)
 		prov_file.close()
+		Info_bank.active_armies += 1
 
 		Info_bank.players_armies_num += 1
 		get_tree().get_root().get_child(1).add_child(new_scene)

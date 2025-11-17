@@ -7,7 +7,7 @@
 		"Wharehine"
 	],
 	"countrie_color": "8d9c57",
-	"has_army": false,
+	"has_army": true,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",
 	"province_controller": "CLV",

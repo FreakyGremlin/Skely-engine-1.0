@@ -6,7 +6,7 @@
 		"Ararua"
 	],
 	"countrie_color": "#ffffbe",
-	"has_army": false,
+	"has_army": true,
 	"name": "Zeeland",
 	"prov_tag": "KAI",
 	"province_controller": "AST",

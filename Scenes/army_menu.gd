@@ -197,6 +197,7 @@ func _input(event: InputEvent) -> void:
 
 					army_parse_result["tile_located_on"] = Info_bank.HoveredProvince
 					army_parse_result["move_points"] -= 1
+					Info_bank.change_file("res://Map_data/Provinces/" + Info_bank.HoveredProvince,prov_parse,"has_army",true)
 					move_points = army_parse_result.get("move_points")
 					
 					move_counter.text = str(move_points)

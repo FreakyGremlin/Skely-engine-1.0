@@ -1,7 +1,7 @@
 {
-	"army_controller": "LIG",
+	"army_controller": "FRI",
 	"army_tag": "1",
 	"infantry_num": 0.0,
-	"move_points": 0.0,
-	"tile_located_on": "Mangatangi.json"
+	"move_points": 1,
+	"tile_located_on": "Manaia.json"
 }

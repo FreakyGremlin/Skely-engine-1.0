@@ -61,6 +61,7 @@ func _ready():
 			nation_file.close()
 			var nation_parse = JSON.parse_string(nation_text)
 			nation_parse["controlled_armies"] = 0
+			nation_parse["gold"] = 0
 			nation_parse["army_names"] = []
 			var nation_string = JSON.stringify(nation_parse)
 			nation_file = FileAccess.open(nation_res, FileAccess.WRITE)
@@ -252,6 +253,7 @@ func import_file(filepath):
 
 
 func ai_turn():
+	get_gold_ai()
 	var nations_active_res = "res://Map_data/nations/nations_active.json"
 	var nations_active_file = FileAccess.open(nations_active_res, FileAccess.READ)
 	var nations_active_text = nations_active_file.get_as_text()
@@ -271,8 +273,18 @@ func ai_turn():
 			var nation_parse = JSON.parse_string(nation_text)
 			controlled_armies_num = nation_parse.get("controlled_armies")
 			if controlled_armies_num > 0:
-				move_army()
-				
+				var random_num = randi_range(1,10)
+				if random_num < 5:
+					move_army()
+				if random_num == 5:
+					pass
+				if random_num > 5:
+					var gold = nation_parse.get("gold")
+					print(str(gold)+cur_ai+"505")
+					if gold >= 1000:
+						expand_army()
+					else:
+						move_army()
 			else:
 				ai_creates_army()
 				
@@ -344,6 +356,7 @@ func ai_creates_army():
 		prov_file = FileAccess.open(prov_res, FileAccess.WRITE)
 		prov_file.store_string(prov_string)
 		prov_file.close()
+		Info_bank.active_armies += 1
 		get_tree().get_root().get_child(1).add_child(new_scene)
 	Info_bank.is_player_active = true
 
@@ -386,19 +399,61 @@ func move_army():
 		var prov_text = prov_file.get_as_text()
 		tile_file.close()
 		var prov_parse = JSON.parse_string(prov_text)
+		var has_army = prov_parse.get("has_army")
 		var prov_marker = prov_parse.get("unit_marker")
 		var prov_tile_controller = prov_parse.get("province_controller")
-		if prov_tile_controller != army_controller:
-			pass
-		else:
-			scene_root.position = Vector2(prov_marker[0], prov_marker[1])
-			
-			army_parse["tile_located_on"] = tile_moving_to + ".json"
-			
-			var army_string = JSON.stringify(army_parse, "\t")
-			army_file = FileAccess.open(army_res, FileAccess.WRITE)
-			army_file.store_string(army_string)
-			army_file.close()
-			
+		if has_army == false:
+			if prov_tile_controller != army_controller:
+				pass
+			else:
+				tile_parse["has_army"] = false
+				tile_file = FileAccess.open(tile_res, FileAccess.WRITE)
+				var tile_string = JSON.stringify(tile_parse, "\t")
+				tile_file.store_string(tile_string)
+				tile_file.close()
+				
+				prov_parse["has_army"] = true
+				prov_file = FileAccess.open(prov_res,FileAccess.WRITE)
+				var prov_string = JSON.stringify(prov_parse, "\t")
+				prov_file.store_string(prov_string)
+				prov_file.close()
+				
+				scene_root.position = Vector2(prov_marker[0], prov_marker[1])
+				
+				army_parse["tile_located_on"] = tile_moving_to + ".json"
+				
+				var army_string = JSON.stringify(army_parse, "\t")
+				army_file = FileAccess.open(army_res, FileAccess.WRITE)
+				army_file.store_string(army_string)
+				army_file.close()
+				
 			
 	Info_bank.is_player_active = true
+
+func expand_army():
+	var enemy_scene = $"."
+	var enemy_script = enemy_scene.get_child(1)
+	
+	
+	Info_bank.text_file("res://Map_data/nations/" + cur_ai + ".json", "")
+	var nat_parse = JSON.parse_string(Info_bank.text)
+	var nat_array = nat_parse.get("army_names")
+	for id in nat_array:
+		Info_bank.text_file("res://Map_data/armies/" + id + ".json", "")
+		var army_parse = JSON.parse_string(Info_bank.text)
+		Info_bank.change_file("res://Map_data/armies/" + id + ".json", army_parse, "infantry_num", 100)
+		Info_bank.change_file("res://Map_data/nations/" + cur_ai + ".json", nat_parse, "gold", -1000)
+	Info_bank.is_player_active = true
+
+
+func get_gold_ai():
+	Info_bank.text_file("res://Map_data/nations/" + cur_ai + ".json", "")
+	var nat_parse = JSON.parse_string(Info_bank.text)
+	var tiles_owned = nat_parse.get("Controlled_provinces")
+	
+	for int in tiles_owned:
+		nat_parse["gold"] += 100
+	var nat_string = JSON.stringify(nat_parse, "\t")
+	var nat_file = FileAccess.open("res://Map_data/nations/" + cur_ai + ".json", FileAccess.WRITE)
+	nat_file.store_string(nat_string)
+	nat_file.close()

@@ -47,7 +47,7 @@ func _on_texture_button_pressed() -> void:
 			nat_file.store_string(nat_string)
 			nat_file.close()
 			
-		for int in Info_bank.players_armies_num + 1:
+		for int in Info_bank.active_armies + 1:
 			if int > 0:
 				var army_res = "res://Map_data/armies/" + "army" + str(int) + ".json"
 				print(army_res)
@@ -68,6 +68,6 @@ func _on_texture_button_pressed() -> void:
 		Info_bank.player_gold += Info_bank.player_revenue
 		Info_bank.gold_counter_player.text = str(Info_bank.player_gold)
 		var main_script = $".."
-		
+		print("updated ui 132")
 		main_script.ai_turn()
 	
