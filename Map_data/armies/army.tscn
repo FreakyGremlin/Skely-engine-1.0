@@ -29,30 +29,6 @@ scale = Vector2(2.835, -2.445)
 texture = ExtResource("3_aa882")
 metadata/_edit_group_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
-offset_left = 86.0
-offset_top = -218.0
-offset_right = 2528.0
-offset_bottom = 85.0
-scale = Vector2(0.1, 0.1)
-theme_override_font_sizes/normal_font_size = 221
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Sprite2D"]
-offset_left = 86.3022
-offset_top = -187.663
-offset_right = 2528.3
-offset_bottom = 115.337
-scale = Vector2(0.1, 0.1)
-theme_override_font_sizes/normal_font_size = 221
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="Sprite2D"]
-offset_left = -97.559
-offset_top = -157.637
-offset_right = 1816.44
-offset_bottom = 145.363
-scale = Vector2(0.1, 0.1)
-theme_override_font_sizes/normal_font_size = 221
-
 [connection signal="child_entered_tree" from="." to="Sprite2D" method="_on_node_2d_child_entered_tree"]
 [connection signal="input_event" from="Sprite2D/Area2D" to="Sprite2D" method="_on_area_2d_input_event"]
 [connection signal="child_entered_tree" from="Sprite2D/Sprite2D2" to="Sprite2D" method="_on_sprite_2d_2_child_entered_tree"]

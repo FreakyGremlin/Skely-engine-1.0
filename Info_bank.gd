@@ -45,8 +45,8 @@ var main_scene_ref : Node = null
 var active_armies = 0
 var army_gd_refs = []
 
-
-
+var tooltip : Node = null
+var tooltip_text = ""
 
 
 

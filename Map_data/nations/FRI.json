@@ -1,12 +1,10 @@
 {
-	"Controlled_provinces": 13.0,
+	"Controlled_provinces": 13,
 	"Nation_color": "889cff",
 	"Nation_name": "Liege",
 	"Nation_tag": "",
-	"army_names": [
-		"army4"
-	],
+	"army_names": [],
 	"capital_prov": "South Auckland",
-	"controlled_armies": 1.0,
+	"controlled_armies": 0.0,
 	"gold": 0.0
 }

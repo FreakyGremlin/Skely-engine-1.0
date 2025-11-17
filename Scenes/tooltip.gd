@@ -1,6 +1,7 @@
 extends Control
 var is_visible = false 
-
+func _ready() -> void:
+	Info_bank.tooltip = $RichTextLabel
 func _input(event: InputEvent) -> void:
 	
 	
@@ -14,5 +15,5 @@ func _input(event: InputEvent) -> void:
 			
 func _process(delta: float) -> void:
 	$".".global_position = get_global_mouse_position()
-	$RichTextLabel.text = Info_bank.HoveredProvinceName
+	$RichTextLabel.text = Info_bank.tooltip_text
 	

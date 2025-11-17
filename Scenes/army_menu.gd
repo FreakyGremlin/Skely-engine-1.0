@@ -172,9 +172,15 @@ func _input(event: InputEvent) -> void:
 
 					var prov_parse = JSON.parse_string(prov_text)
 					var tile_is_occupied = prov_parse.get("has_army")
+					prov_controller = prov_parse.get("province_controller")
 					
-					if Info_bank.HoveredProvinceName == id and tile_is_occupied == false:
-						can_move_here = true
+					if prov_controller == Info_bank.ControlledNation:
+						if Info_bank.HoveredProvinceName == id and tile_is_occupied == false:
+							can_move_here = true
+					else:
+						Info_bank.tooltip_text = "cannot move here"
+						print(str(Info_bank.tooltip)+ "123")
+					
 				if can_move_here == true:
 					var scene_root = Info_bank.army_root_ref
 					# Read province data
@@ -188,7 +194,7 @@ func _input(event: InputEvent) -> void:
 
 					var prov_parse = JSON.parse_string(prov_text)
 					var prov_marker = prov_parse.get("unit_marker")
-					prov_controller = prov_parse.get("province_controller")
+					
 
 					scene_root.position = Vector2(prov_marker[0], prov_marker[1])
 					$RichTextLabel.text = Info_bank.HoveredProvinceName

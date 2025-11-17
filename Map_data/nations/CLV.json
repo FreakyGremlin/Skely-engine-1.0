@@ -1,12 +1,1 @@
-{
-	"Controlled_provinces": 7.0,
-	"Nation_color": "8d9c57",
-	"Nation_name": "Cleve",
-	"Nation_tag": "",
-	"army_names": [
-		"army5"
-	],
-	"capital_prov": "Warkworth",
-	"controlled_armies": 1.0,
-	"gold": 2700.0
-}
+{"Controlled_provinces":7.0,"Nation_color":"8d9c57","Nation_name":"Cleve","Nation_tag":"","army_names":[],"capital_prov":"Warkworth","controlled_armies":0,"gold":0}

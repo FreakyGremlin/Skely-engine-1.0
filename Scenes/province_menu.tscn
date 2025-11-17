@@ -16,10 +16,15 @@ position = Vector2(0, 31)
 texture = ExtResource("2_5hl6p")
 
 [node name="Button" type="Button" parent="ProvinceUiBackground/ProvinceUi"]
+anchors_preset = -1
+anchor_right = 0.32
 offset_left = -38.0
 offset_top = -48.0
-offset_right = 40.0
-offset_bottom = -32.0
+offset_right = 311.0
+offset_bottom = 29.0
+scale = Vector2(0.205, 0.205)
+theme_override_font_sizes/font_size = 50
+text = "DECLARE WAR"
 metadata/_edit_use_anchors_ = true
 
 [node name="ProvinceUi" type="Sprite2D" parent="ProvinceUiBackground/ProvinceUi"]
@@ -74,3 +79,5 @@ scale = Vector2(0.1, 0.1)
 theme_override_font_sizes/normal_font_size = 75
 fit_content = true
 tab_size = 2
+
+[connection signal="pressed" from="ProvinceUiBackground/ProvinceUi/Button" to="." method="_on_button_pressed"]

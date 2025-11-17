@@ -5,7 +5,7 @@
 		"Port Charles"
 	],
 	"countrie_color": "889cff",
-	"has_army": true,
+	"has_army": false,
 	"manpower": 12375.0,
 	"name": "Zeeland",
 	"prov_tag": "ZEE",

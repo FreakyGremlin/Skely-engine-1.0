@@ -19,6 +19,7 @@ func _enter_tree() -> void:
 	
 	Info_bank.menu_is_active = true
 func _on_button_1_pressed() -> void:
+	# SET CONTROLLED NATION
 	Info_bank.ControlledNation = Info_bank.HoveredNation
 	Info_bank.ControlledNationColour = Info_bank.HoveredNationColour
 	var nat_array_res = "res://Map_data/nations/nations_active.json"
@@ -37,7 +38,7 @@ func _on_button_1_pressed() -> void:
 	Info_bank.main_menu_is_active = false
 
 func _on_button_2_pressed() -> void:
-	# Get the hovered province name
+	# SET OWNER OF PROVINCE
 	var HoveredProvince = Info_bank.selected_prov
 	if HoveredProvince == null or HoveredProvince == "":
 		push_error("No hovered province selected.")
@@ -102,18 +103,12 @@ func _on_button_3_pressed() -> void:
 	print(str(Info_bank.menu_is_active) + str(1))
 	var canvas_layer: CanvasLayer = null
 	if Info_bank.menu_is_active == true:
-		# Look for CanvasLayer in the current scene
-		for node in get_tree().get_current_scene().get_children():
-			if node is CanvasLayer:
-				canvas_layer = node
-				break
-		if canvas_layer:
-			var scene_to_instantiate = load("res://Scenes/province_menu.tscn")
-			Info_bank.new_scene = scene_to_instantiate.instantiate()  # Use global new_scene
-			canvas_layer.add_child(Info_bank.new_scene)
-			Info_bank.new_scene.global_position = Vector2(200, 700)
-			self.queue_free()
-			Info_bank.menu_is_active = true
+		var scene_to_instantiate = load("res://Scenes/province_menu.tscn")
+		Info_bank.new_scene = scene_to_instantiate.instantiate()  # Use global new_scene
+		Info_bank.canvas_ref.add_child(Info_bank.new_scene)
+		Info_bank.new_scene.global_position = Vector2(200, 700)
+		self.queue_free()
+		Info_bank.menu_is_active = true
 
 
 func _on_button_4_pressed() -> void:

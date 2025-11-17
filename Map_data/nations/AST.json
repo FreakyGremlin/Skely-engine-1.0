@@ -4,9 +4,11 @@
 	"Nation_name": "Austrabest",
 	"Nation_tag": "",
 	"army_names": [
-		"army3"
+		"army2"
 	],
 	"capital_prov": "Waimatenui",
 	"controlled_armies": 1.0,
-	"gold": 0.0
+	"gold": 0.0,
+	"diplomatic relations" : [
+	]
 }

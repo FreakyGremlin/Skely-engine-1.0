@@ -71,12 +71,12 @@ func loaded_in():
 	army_file.close()
 	var army_parse = JSON.parse_string(army_text)
 	var infanty_num_for_label = army_parse.get("infantry_num")
-	$RichTextLabel.text = str(infanty_num_for_label*10)
+	
 	var full_name = tile_located_on
 	var dot_index = full_name.rfind(".")
 	if dot_index != -1:
 		full_name = full_name.substr(0, dot_index)
-	$RichTextLabel2.text = full_name
+	
 	
 	
 	var prov_res = "res://Map_data/Provinces/" + tile_located_on
