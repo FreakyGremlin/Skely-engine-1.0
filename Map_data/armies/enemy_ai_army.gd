@@ -83,16 +83,39 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 				var nat_text = nat_file.get_as_text()
 				nat_file.close()
 				var nat_parse = JSON.parse_string(nat_text)
-				nat_parse["controlled_armies"] -= 1
+				var ai_army_size = ai_army_parse.get("infantry_num")
+				var player_army_size = player_army_parse.get("infantry_num")
 				
-				var nat_string = JSON.stringify(nat_parse, "\t")
-				nat_file = FileAccess.open(nat_res, FileAccess.WRITE)
-				nat_file.store_string(nat_string)
-				nat_file.close()
-				self.queue_free()
+				print(str(ai_army_parse)+"ai_army_parse"+ "133")
+				print(str(player_army_parse)+"player_army-parse"+ "133")
+				
+				if ai_army_size > player_army_size:
+					nat_parse["controlled_armies"] -= 1
+					
+					Info_bank.change_file("res://Map_data/armies/" + player_army_name + ".json", ai_army_parse, "infantry_num", int(-player_army_size))
+					
+					self.queue_free()
+					var nat_string = JSON.stringify(nat_parse, "\t")
+					nat_file = FileAccess.open(nat_res, FileAccess.WRITE)
+					nat_file.store_string(nat_string)
+					nat_file.close()
+				else:
+					Info_bank.change_file("res://Map_data/armies/" + name_of_army_file + ".json", player_army_parse, "infantry_num", int(-ai_army_size))
+					
+					Info_bank.selected_thing.queue_free()
+					var nat_string = JSON.stringify(nat_parse, "\t")
+					nat_file = FileAccess.open(nat_res, FileAccess.WRITE)
+					nat_file.store_string(nat_string)
+					nat_file.close()
+				
+				
+				
+				
+				
 				Info_bank.attack_mode_active = false
 				Info_bank.selected_thing.deselected()
 				Info_bank.new_scene.queue_free()
+				
 func loaded_in():
 	var scene_root = $".."
 	is_selected = false

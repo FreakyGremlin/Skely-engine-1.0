@@ -1,7 +1,7 @@
 {
 	"army_controller": "LIG",
 	"army_tag": "1",
-	"infantry_num": 100.0,
+	"infantry_num": 0.0,
 	"move_points": 1.0,
 	"tile_located_on": "Pauanui.json"
 }

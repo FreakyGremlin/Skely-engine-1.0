@@ -39,7 +39,7 @@ func _enter_tree() -> void:
 	move_counter.text = str(move_points)
 	var army_num = army_parse.get("infantry_num", 0)
 	infantry_num = army_num
-	infantry_label.text = str(infantry_num * 100)
+	infantry_label.text = str(infantry_num)
 	location_tile.text = Info_bank.HoveredProvinceName
 	
 
@@ -60,7 +60,7 @@ func _exit_tree() -> void:
 	move_counter.text = str(move_points)
 	var army_num = army_parse.get("infantry_num", 0)
 	infantry_num = army_num
-	infantry_label.text = str(infantry_num * 100)
+	infantry_label.text = str(infantry_num)
 	location_tile.text = Info_bank.HoveredProvinceName
 	
 func _on_button_2_pressed() -> void:
@@ -71,9 +71,9 @@ func _on_button_2_pressed() -> void:
 		var army_text = army_file.get_as_text()
 		army_file.close()
 		var army_parse = JSON.parse_string(army_text)
-		infantry_num += 1
+		infantry_num += 100
 		army_parse["infantry_num"] = infantry_num
-		infantry_num_label.text = str(infantry_num * 100)
+		infantry_num_label.text = str(infantry_num)
 		army_file = FileAccess.open(army_res, FileAccess.WRITE)
 		Info_bank.gold_counter_player.text = str(Info_bank.player_gold)
 		army_file.store_string(JSON.stringify(army_parse, "\t"))
@@ -81,7 +81,7 @@ func _on_button_2_pressed() -> void:
 
 func _on_button_3_pressed() -> void:
 	#ANNEX CODE
-	if infantry_num * 100 > 100:
+	if infantry_num > 100:
 		Info_bank.name_of_current_army_file = name_of_army_file
 		var army_res = "res://Map_data/armies/" + name_of_army_file + ".json"
 		var army_file = FileAccess.open(army_res,FileAccess.READ)

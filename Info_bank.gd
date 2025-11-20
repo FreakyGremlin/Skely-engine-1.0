@@ -48,7 +48,7 @@ var army_gd_refs = []
 var tooltip : Node = null
 var tooltip_text = ""
 
-
+var army_is_selected = false
 
 #funcs
 var text = ""

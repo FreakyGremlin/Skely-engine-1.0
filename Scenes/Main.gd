@@ -68,6 +68,23 @@ func _ready():
 			nation_file.store_string(nation_string)
 			nation_file.close()
 	
+	for id in nations_active_array:
+		
+		var diplo_text = "{"
+		for nat_id in nations_active_array:
+			if id == nat_id:
+				pass
+			else:
+				diplo_text += '"' + nat_id + '":' + '"peace"' + ","
+		diplo_text += "}"
+		var diplo_file = FileAccess.open("res://Map_data/nations/Nations diplo/" + id + ".json", FileAccess.WRITE)
+		diplo_file.store_string(diplo_text)
+		diplo_file.close()
+			
+			
+			
+			
+	
 	
 	
 	
@@ -120,8 +137,10 @@ func _input(event):
 		_last_mouse_position = get_global_mouse_position()
 		Info_bank.last_mouse_position = _last_mouse_position
 		Info_bank.selected_prov = Info_bank.HoveredProvince
+		
 		Info_bank.selected_prov_name = Info_bank.HoveredProvinceName
 		if Info_bank.menu_is_active == false:
+			
 			Info_bank.new_scene = main_menu.instantiate()
 			selected_army_menu = Info_bank.new_scene
 			add_child(Info_bank.new_scene)
@@ -130,9 +149,16 @@ func _input(event):
 			Info_bank.menu_is_active = true
 		else:
 			if Info_bank.new_scene != null:
+				if Info_bank.army_is_selected == true:
+					Info_bank.selected_thing.is_selected = false
+					Info_bank.something_selected == false
+					Info_bank.menu_is_active == false
+					Info_bank.army_is_selected = false
 				Info_bank.new_scene.queue_free()
 				Info_bank.new_scene = null
 				Info_bank.menu_is_active = false
+				
+				
 			Info_bank.menu_is_active = false
 			
 		if Info_bank.something_selected == true:
@@ -375,7 +401,7 @@ func move_army():
 	nation_file.close()
 	var nation_parse = JSON.parse_string(nation_text)
 	var army_name_array = nation_parse.get("army_names")
-	
+	var war_array = nation_parse.get("at_war_with")
 	for id in army_name_array:
 		var army_res = "res://Map_data/armies/" + id + ".json"
 		var army_file = FileAccess.open(army_res, FileAccess.READ)
@@ -402,10 +428,22 @@ func move_army():
 		var has_army = prov_parse.get("has_army")
 		var prov_marker = prov_parse.get("unit_marker")
 		var prov_tile_controller = prov_parse.get("province_controller")
+		var can_move_here = false
+		#has army
 		if has_army == false:
-			if prov_tile_controller != army_controller:
-				pass
+			if prov_tile_controller == army_controller:
+				can_move_here = true
 			else:
+				for natid in war_array:
+					print(str(natid) +"natid"+ "102")
+					if natid == prov_tile_controller:
+						can_move_here = true
+			print(str(prov_tile_controller) +"controller"+ "102")
+			print(str(army_controller)+"army" + "102")
+			print(str(war_array)+"at war with" + "102")
+		
+		if can_move_here == true:
+				pass
 				tile_parse["has_army"] = false
 				tile_file = FileAccess.open(tile_res, FileAccess.WRITE)
 				var tile_string = JSON.stringify(tile_parse, "\t")

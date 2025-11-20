@@ -1,7 +1,7 @@
 {
-	"army_controller": "LIG",
+	"army_controller": "FRI",
 	"army_tag": "1",
-	"infantry_num": 400.0,
-	"move_points": 1,
-	"tile_located_on": "Port Charles.json"
+	"infantry_num": 15.0,
+	"move_points": 1.0,
+	"tile_located_on": "Thames.json"
 }

@@ -15,6 +15,11 @@ var army_base_data = {
 	
 }
 var infantry_num = 0
+func _process(delta: float) -> void:
+	if is_selected == false:
+		$Sprite2D2.visible = false
+	else:
+		$Sprite2D2.visible = true
 func _ready():
 		selected_indicator.visible = false
 func deselected():
@@ -38,6 +43,7 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 					Info_bank.canvas_ref.add_child(Info_bank.new_scene)
 					Info_bank.new_scene.global_position = Vector2(200, 700)
 					Info_bank.menu_is_active = true
+					Info_bank.army_is_selected = true
 					Info_bank.army_menu = Info_bank.new_scene
 					print("scene made")
 				is_selected = true
@@ -124,6 +130,7 @@ func update_army_file():
 	move_menu_is_open = false
 
 func _input(event: InputEvent) -> void:
+
 	if Input.is_action_just_released("click_left"):
 		
 		if move_menu_is_open == true:

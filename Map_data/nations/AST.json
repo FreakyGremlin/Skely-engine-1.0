@@ -1,14 +1,1 @@
-{
-	"Controlled_provinces": 10.0,
-	"Nation_color": "#ffffbe",
-	"Nation_name": "Austrabest",
-	"Nation_tag": "",
-	"army_names": [
-		"army2"
-	],
-	"capital_prov": "Waimatenui",
-	"controlled_armies": 1.0,
-	"gold": 0.0,
-	"diplomatic relations" : [
-	]
-}
+{"Controlled_provinces":10.0,"Nation_color":"#ffffbe","Nation_name":"Austrabest","Nation_tag":"","army_names":[],"at_war_with":[],"capital_prov":"Waimatenui","controlled_armies":0,"diplomatic relations":[],"gold":0}

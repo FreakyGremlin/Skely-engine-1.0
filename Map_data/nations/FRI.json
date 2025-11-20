@@ -4,6 +4,7 @@
 	"Nation_name": "Liege",
 	"Nation_tag": "",
 	"army_names": [],
+	"at_war_with": [],
 	"capital_prov": "South Auckland",
 	"controlled_armies": 0.0,
 	"gold": 0.0
